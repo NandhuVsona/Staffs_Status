@@ -242,11 +242,11 @@ pages.forEach((page) => {
   });
 
   page.addEventListener("touchend", () => {
-    if (startX + 100 < moveX) {
+    if (startX + 200 < moveX) {
       index = index > 0 ? --index : 0;
       pages[index].classList.remove("ani");
       b();
-    } else if (startX - 100 > moveX) {
+    } else if (startX - 200 > moveX) {
       index = index < 14 ? ++index : 13;
       pages[index].classList.add("ani");
       b();
