@@ -1,0 +1,247 @@
+h2 {
+  font-size: 20px;
+}
+
+* {
+  margin: 0;
+  padding: 0%;
+  box-sizing: border-box;
+  font-family: "Poppins", "sanserif";
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
+  gap: 15px;
+}
+.container header {
+  width: 330px;
+  text-align: center;
+}
+.container header h1 {
+  font-size: 30px;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+.container header .progress {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+  position: relative;
+  flex-wrap: wrap;
+}
+.container header .progress .progress-line {
+  position: absolute;
+  width: 0px;
+  height: 6px;
+  z-index: -1;
+  background-color: orange;
+  transition: all 0.5s ease;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+}
+.container header .progress::before {
+  content: "";
+  z-index: -1;
+  left: 0;
+  position: absolute;
+  width: 100%;
+  height: 6px;
+  background-color: rgb(195, 195, 195);
+}
+.container header .progress .progress-steps {
+  background-color: rgb(195, 195, 195);
+  font-weight: 700;
+  font-size: 18px;
+  border-radius: 50%;
+  line-height: 45px;
+  width: 45px;
+  transition: all 0.3s ease;
+  height: 45px;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+}
+.container header .progress .progress-steps.active {
+  background-color: orange;
+}
+.container form {
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  flex-direction: column;
+  gap: 30px;
+  width: 360px;
+  padding: 0px 7px;
+}
+.container form .form-page {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 30px;
+  display: none;
+}
+.container form .form-page .form-group {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  gap: 10px;
+}
+.container form .form-page .form-group label {
+  font-weight: 600;
+  padding-left: 5px;
+}
+.container form .form-page .form-group .icon-input {
+  display: flex;
+  border: 1px solid;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  padding-left: 15px;
+  overflow: hidden;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+}
+.container form .form-page .form-group .icon-input i {
+  font-size: 21px;
+}
+.container form .form-page .form-group .icon-input input {
+  width: 100%;
+  height: 53px;
+  border: none;
+  padding-left: 13px;
+  font-size: 18px;
+}
+.container form .form-page .form-group .icon-input input:focus {
+  outline: none;
+}
+.container form .form-page .form-group .icon-input input[type=file] {
+  visibility: hidden;
+}
+.container form .form-page .form-group .icon-input input[type=file] + label {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  background-color: #64b4e9;
+  text-align: center;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+}
+.container form .form-page button {
+  width: 100%;
+  height: 50px;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 17px;
+  cursor: pointer;
+  background-color: orange;
+  border: none;
+  color: #000000;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+}
+.container form .form-page .btns {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-content: space-around;
+  gap: 30px;
+}
+.container form .form-page .btns .submit {
+  background-color: white;
+  border: 2px solid orange;
+}
+.container form .form-page.active {
+  display: flex;
+  transform-origin: top;
+  animation: slide 0.5s ease;
+  transition: all 0.5s ease;
+  -webkit-animation: slide 0.5s ease;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+}
+@keyframes slide {
+  0% {
+    transform: scale(-1, 0);
+    opacity: 0;
+    -webkit-transform: scale(-1, 0);
+    -moz-transform: scale(-1, 0);
+    -ms-transform: scale(-1, 0);
+    -o-transform: scale(-1, 0);
+  }
+  100% {
+    transform: scale(1, 1);
+    opacity: 1;
+    -webkit-transform: scale(1, 1);
+    -moz-transform: scale(1, 1);
+    -ms-transform: scale(1, 1);
+    -o-transform: scale(1, 1);
+  }
+}
+.container form .form-page.active.time-table {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+.container form .form-page.active.time-table .morning-sections,
+.container form .form-page.active.time-table .afterbreak-sections,
+.container form .form-page.active.time-table .afternoon-sectins {
+  width: 100%;
+  gap: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.container form .form-page.active.time-table .morning-sections .form-group,
+.container form .form-page.active.time-table .afterbreak-sections .form-group,
+.container form .form-page.active.time-table .afternoon-sectins .form-group {
+  gap: 10px;
+}
+.container form .form-page.active.time-table .last-period {
+  width: 100%;
+}
+.container form .form-page.active.time-table .last-period .form-group {
+  width: 100%;
+  gap: 10px;
+}
+.container form .form-page.active.time-table .last-period .form-group label {
+  width: 100%;
+  text-align: center;
+}/*# sourceMappingURL=style.css.map */

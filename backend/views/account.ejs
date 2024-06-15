@@ -1,0 +1,1324 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+      user-scalable="no"
+    />
+    <title></title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        user-select: none;
+        font-family: "Poppins", "sanserif";
+      }
+      :root {
+        --primary: #f2f2f2ed;
+      }
+      body {
+        height: 100%;
+
+        background-color: rgb(255, 255, 255);
+        padding: 10px;
+      }
+      .container {
+        overflow: hidden;
+        height: 100%;
+        background-color: #ffffff;
+        margin-top: 55px;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        border-radius: 30px;
+        animation: up 0.5s ease;
+      }
+
+      .container a i {
+        font-size: 25px;
+        color: #8c8c8c;
+      }
+      section {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+      }
+
+      @keyframes rotate {
+        0% {
+          opacity: 0;
+          transform: scale(0);
+        }
+      }
+
+      @keyframes up {
+        0% {
+          opacity: 0;
+          transform: translateY(200px);
+        }
+      }
+      a:hover {
+        background-color: rgb(240, 240, 240);
+      }
+
+      @keyframes down {
+        0% {
+          opacity: 0;
+          transform: translateY(-200px);
+        }
+      }
+
+      .account-header {
+        position: absolute;
+        top: 0;
+        color: #ffffff;
+        left: 0;
+        height: 50dvh;
+        width: 100%;
+        padding-left: 10px;
+        background: linear-gradient(
+          to bottom left,
+
+          rgb(0, 255, 221),
+          rgb(81, 0, 255)
+        );
+        border-radius: 0px 0px 30px 30px;
+        display: flex;
+        justify-content: flex-start;
+        animation: down 0.3s ease;
+      }
+
+      .settings {
+        width: 50px;
+        height: 50px;
+        overflow: hidden;
+        border-radius: 50%;
+      }
+
+      .profile {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: #ffffff;
+        padding: 15px;
+        gap: 10px;
+      }
+      img {
+        width: 100%;
+        animation: rotate 0.5s ease;
+      }
+      .head-body {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        height: 67px;
+        gap: 5px;
+      }
+      .settings i {
+        font-size: 25px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+      }
+      .fields {
+        margin: 15px 0px 5px 0px;
+        width: 100%;
+
+        height: 50px;
+      }
+      .fields ul {
+        list-style: none;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        height: 100%;
+      }
+      .fields ul li i {
+        font-size: 25px;
+      }
+      .fields ul li {
+        flex-grow: 1;
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        transition: all 0.15s ease;
+        overflow: hidden;
+      }
+      .fields ul li i {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        opacity: 0.8;
+        color: #656565;
+      }
+      .faculty__details_1 {
+        text-align: center;
+      }
+      .fields ul li.active i {
+        background-color: #dadbdb;
+        background-color: rgb(255, 255, 255);
+        border-bottom: 3px solid;
+        color: #3c3c3c;
+        animation: rotate 0.3s ease;
+        opacity: 1;
+      }
+      @keyframes rotate {
+        0% {
+          transform: translateY(50px);
+        }
+      }
+
+      .icons-content.hide {
+        display: none;
+      }
+      section {
+        width: 100%;
+        height: 50px;
+      }
+      .icons-content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #000000;
+        flex-direction: column;
+      }
+      .nested {
+        display: flex;
+        height: 50px;
+      }
+
+      a {
+        text-decoration: none;
+      }
+
+      .container.dark,
+      .container.dark + .count-body + .previous-records header,
+      .container.dark table {
+        background-color: #2e2e2e;
+        color: #ffffff;
+        background-image: none;
+      }
+      .container.dark .dp__ {
+        box-shadow: none;
+      }
+      .container.dark table .day,
+      .container.dark table th {
+        background-color: rgb(101, 101, 101);
+      }
+      .container.dark .icons i {
+        background-color: #fff;
+        color: #000000;
+      }
+      .container.dark .icons.active i {
+        background-color: #00ddff;
+        color: #000000;
+      }
+      .staff__dp {
+        width: 120px;
+        height: 120px;
+        display: flex;
+        border-radius: 50%;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      }
+      .staff__dp img {
+        width: 100%;
+      }
+      .update {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        gap: 20px;
+        padding: 10px;
+        height: 70px;
+        margin-bottom: 15px;
+      }
+      .update a {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .update a .optimize {
+        width: 100%;
+        background-color: rgb(0, 166, 255);
+      }
+      .update a .status-btn {
+        width: 100%;
+        background-color: rgb(123, 0, 255);
+      }
+      .update a button {
+        font-weight: 600;
+        font-size: 18px;
+        border-radius: 5px;
+        border: none;
+        display: flex;
+        justify-content: center;
+        height: 100%;
+        align-items: center;
+        gap: 10px;
+        color: #ffffff;
+        transition: all 0.4s ease;
+      }
+      .update a button i {
+        color: #ffffff;
+        font-size: 18px;
+      }
+      .update a button:active {
+        transform: scale(0.9);
+      }
+      .timetable {
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 65em;
+        height: 400px;
+      }
+      .outer-table {
+        width: 360px;
+        border: 2px solid rgb(255, 255, 255);
+        border-radius: 10px;
+        overflow-x: scroll;
+        -ms-overflow-style: none; /* IE and Edge */
+        scrollbar-width: none;
+      }
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        height: 100%;
+        overflow-x: scroll;
+      }
+      td,
+      th {
+        padding: 7px 10px;
+      }
+      table {
+        position: relative;
+        background-color: #fff;
+      }
+      .day {
+        background-color: rgb(215, 215, 215);
+        position: sticky;
+        left: -1px;
+        width: 80px;
+      }
+      tr > th {
+        background-color: rgb(207, 207, 209);
+      }
+      #out {
+        background-color: transparent;
+      }
+      @media only screen and (min-width: 576px) {
+        .outer-table {
+          width: 500px;
+        }
+      }
+      @media only screen and (min-width: 755px) {
+        .outer-table {
+          width: 750px;
+        }
+        .details__ p {
+          font-size: 20px;
+        }
+        .profile__ {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
+          gap: 15px;
+          width: 100%;
+        }
+        img {
+          width: 100%;
+          height: 100%;
+        }
+        .dp__ {
+          width: 180px;
+          height: 180px;
+        }
+        .facultys__data {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          justify-content: center;
+          align-items: center;
+          padding-top: 10px;
+        }
+        .faculty__name_,
+        .faculty__details_ {
+          text-align: center;
+          font-size: 20px;
+        }
+        .faculty__details_ {
+          font-size: 18px;
+        }
+        .btns {
+          width: 100%;
+          display: flex;
+
+          flex-direction: column;
+        }
+        .contact {
+          display: flex;
+          justify-content: space-around;
+          width: 60%;
+          margin: 20px 0px;
+        }
+        button {
+          width: 150px;
+          height: 50px;
+
+          font-size: 20px;
+        }
+        .day {
+          background-color: rgb(231, 234, 239);
+        }
+        tr > th {
+          background-color: rgb(224, 226, 228);
+        }
+        tr > td,
+        tr > th {
+          font-size: 20px;
+          padding: 5px 10px;
+        }
+        #out {
+          background-color: transparent;
+        }
+        .today-status {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 100%;
+          height: 50px;
+        }
+        .today-status img {
+          width: 40px;
+          height: 40px;
+        }
+
+        .bold {
+          font-weight: 500;
+          font-size: 20px;
+        }
+        .details__ p {
+          font-size: 20px;
+        }
+        .faculty__name_ {
+          font-size: 30px;
+        }
+        section {
+          display: flex;
+
+          flex-direction: column;
+        }
+      }
+
+      .previous-records {
+        text-align: center;
+        user-select: none;
+
+        padding: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        margin-top: 10px;
+        margin-bottom: 30px;
+      }
+
+      tr img {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+      }
+      .tabel-body {
+        width: 350px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: all 0.3s ease;
+        animation: open 0.3s ease-out forwards;
+        transform-origin: top;
+      }
+
+      .tabs::-webkit-scrollbar {
+        display: none;
+      }
+
+      .today-status {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+
+        height: 50px;
+      }
+
+      .today-status img {
+        width: 30px;
+        height: 30px;
+      }
+      .bold {
+        font-weight: 500;
+        font-size: 18px;
+      }
+      .details__ p {
+        width: 100%;
+        font-size: 15px;
+        text-align: left !important;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .status {
+        border-radius: 50%;
+      }
+      .count-body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .count {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 370px;
+        margin-top: 15px;
+        height: 160px;
+        padding: 10px;
+        gap: 15px;
+      }
+      .pcount,
+      .acount {
+        padding: 5px 15px;
+        font-size: 18px;
+        width: 100%;
+        color: white;
+        border-radius: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 18px;
+        gap: 5px;
+        height: 120px;
+        text-align: center;
+        flex-direction: column;
+      }
+      .pcount p,
+      .acount p {
+        font-weight: bold;
+      }
+
+      .pcount {
+        background-color: #4bbe73;
+      }
+      .coutn p {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+      }
+
+      .acount {
+        background-color: #f763c6;
+      }
+      .mark {
+        clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+        background-color: #ffffff;
+        color: #000000;
+        width: 80px;
+        height: 80px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .tabel-body {
+        position: relative;
+      }
+      .tabel-body table th {
+        position: sticky;
+        top: 0;
+        height: 40px;
+        background: linear-gradient(
+          to bottom left,
+
+          rgb(144, 255, 240),
+          rgb(157, 115, 247)
+        );
+      }
+      .previous-records {
+        text-align: center;
+        user-select: none;
+
+        padding: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        margin-top: 10px;
+        margin-bottom: 30px;
+      }
+
+      tr img {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+      }
+      .tabel-body {
+        width: 350px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: all 0.3s ease;
+        animation: open 0.3s ease-out forwards;
+        transform-origin: top;
+      }
+
+      @keyframes open {
+        from {
+          transform: translateY(-10px) scaleY(0); /* Add scaleY(0) to make it appear like it's opening from the top */
+          opacity: 0; /* Add opacity 0 in the 'from' keyframe as well */
+        }
+        to {
+          transform: translateY(0) scaleY(1); /* Change to translateY(0) and scaleY(1) to show the full content */
+          opacity: 1; /* Change opacity to 1 to fully reveal the content */
+        }
+      }
+
+      .tabel-body.close {
+        display: none;
+      }
+      .fa-angle-up {
+        transition: all 0.3s ease;
+      }
+      .fa-angle-up.down {
+        transform: rotate(180deg);
+      }
+      .previous-records table tr:nth-child(even) {
+        background-color: #f1f1f1;
+      }
+      .clock-card {
+        width: 100%;
+        padding: 15px 10px;
+        border-radius: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        position: relative;
+        gap: 30px;
+        background: linear-gradient(
+          to bottom left,
+
+          rgb(0, 255, 221),
+          rgb(81, 0, 255)
+        );
+        animation: cardPopUp 1s ease;
+        overflow: hidden;
+      }
+      .card-cover {
+        background: linear-gradient(
+          to bottom left,
+
+          rgb(0, 255, 221),
+          rgb(81, 0, 255)
+        );
+      }
+      @keyframes cardPopUp {
+        0% {
+          opacity: 0;
+          transform: translateY(100px);
+        }
+      }
+
+      @keyframes rotate {
+        0% {
+          transform: rotate(20deg);
+        }
+      }
+      .clock-body {
+        width: 200px;
+        height: 200px;
+        background-color: rgb(222, 222, 222);
+        padding: 12px;
+        border-radius: 50%;
+        margin-top: 35px;
+      }
+      .clock-card::before {
+        content: "";
+        bottom: 0;
+        position: absolute;
+        width: 95%;
+        height: 43%;
+        background-color: rgb(255, 255, 255);
+        border-radius: 20px 20px 0px 0px;
+        z-index: 1;
+        animation: downup 1s ease 0.2s;
+      }
+      @keyframes downup {
+        0% {
+          transform: translateY(500px);
+        }
+      }
+      @keyframes open {
+        0% {
+          opacity: 0;
+          transform: scale(0);
+        }
+      }
+      .outer-border {
+        background-color: rgb(96, 88, 88);
+        width: 100%;
+        height: 100%;
+        padding: 10px;
+        border-radius: 50%;
+        transition: all 1s ease;
+        box-shadow: -1px -1px 5px rgb(0, 0, 0);
+        animation: open 1s ease;
+      }
+
+      .middle-border {
+        background-color: rgb(255, 255, 255);
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        pad: 10px;
+      }
+      .inner-border {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+      }
+      .today {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+      }
+      .time {
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+      }
+      .clock-head {
+        position: absolute;
+        top: 0;
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        background-color: rgb(67, 66, 65);
+        color: #fff;
+        z-index: 10;
+        animation: downup 0.5s ease;
+      }
+      .gender img {
+        animation: none;
+        filter: none;
+      }
+      .attendance-box {
+        width: 100%;
+        animation: downup 1s ease 0.2s;
+
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        flex-direction: column;
+      }
+      .attendance-box img {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+      }
+      .gender {
+        text-align: center;
+        width: 100%;
+      }
+      .switch {
+        width: 80px;
+        height: 40px;
+        border-radius: 50px;
+        background-color: rgb(202, 0, 0);
+        position: relative;
+      }
+      .switch::before {
+        content: "";
+        position: absolute;
+        width: 30px;
+        height: 30px;
+
+        left: 55%;
+        top: 5px;
+        background-color: rgb(255, 255, 255);
+        border-radius: 50%;
+        transition: all 0.3s ease;
+      }
+      .switch.move {
+        background-color: rgb(0, 156, 60);
+      }
+      .switch.move::before {
+        left: 5px;
+      }
+
+      .gender {
+        display: flex;
+        width: 100%;
+        align-items: center;
+        justify-content: space-around;
+      }
+
+      .shake {
+        transition: all 0.3s ease;
+        animation: shake 0.3s ease;
+      }
+      .box-body {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        z-index: 2;
+      }
+      @keyframes shake {
+        0% {
+          transform: translateX(0px);
+        }
+        50% {
+          transform: translateX(-5px);
+          border: 2px solid red;
+        }
+        100% {
+          transform: translateX(5px);
+          border: 2px solid red;
+        }
+      }
+      .btns {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        padding: 0px 10px;
+        z-index: 2;
+      }
+      .btns button {
+        width: 100%;
+        height: 50px;
+        border-radius: 5px;
+        font-weight: 600;
+        font-size: 16px;
+        border: none;
+        background-color: #fff;
+      }
+      .discard {
+        background-color: rgb(0, 255, 221) !important;
+      }
+      .save-status-btn {
+        background-color: rgb(81, 0, 255) !important;
+        color: #ffffff !important;
+      }
+      .current-time {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .card-cover {
+        position: absolute;
+        top: 40px;
+        z-index: 2;
+        width: 100%;
+      }
+      body.clock {
+        height: 100vh;
+        overflow: hidden;
+      }
+      body.clock .outer-table,
+      body.clock .profile,
+      body.clock .update,
+      body.clock .previous-records,
+      body.clock .count-body {
+        display: none;
+      }
+      body.clock .container {
+        border-radius: 0px;
+        background-color: transparent;
+      }
+      .card-cover.hide {
+        display: none;
+      }
+
+      .msg-container.hide {
+        display: none;
+      }
+      .msg-container {
+        position: absolute;
+        top: 15px;
+        background-color: rgb(255, 255, 255);
+        text-align: center;
+        padding: 10px;
+        width: 95%;
+        border-radius: 5px;
+        font-size: 17px;
+        animation: message 1s ease;
+      }
+      @keyframes message {
+        0% {
+          opacity: 0;
+
+          transform: translateY(-200px);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="account-header">
+      <div class="head-body">
+        <div class="settings">
+          <i class="fa-solid fa-user-gear"></i>
+        </div>
+        <h2>Account</h2>
+      </div>
+    </header>
+    <div class="container">
+      <div class="card-cover hide">
+        <div class="clock-card">
+          <header class="clock-head"><h2>Today Status</h2></header>
+          <div class="clock-body">
+            <div class="outer-border">
+              <div class="middle-border">
+                <div class="inner-border">
+                  <div class="time">
+                    <h1 class="current-time">
+                      <div class="hour">00</div>
+                      <span>:</span>
+                      <div class="min">00</div>
+                      <span>:</span>
+                      <div class="sec">00</div>
+                    </h1>
+                    <div class="today">
+                      <div class="date"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="box-body">
+            <div class="form-group">
+              <input
+                type="text"
+                value="absent"
+                name="attendance"
+                id="gender"
+                hidden
+              />
+              <div class="attendance-box">
+                <div class="gender">
+                  <div class="male">
+                    <img
+                      loading="lazy"
+                      class="img"
+                      src="present.jpg"
+                      alt="Male"
+                    />
+                    <p>Present</p>
+                  </div>
+                  <div class="switch"></div>
+                  <div class="female">
+                    <img loading="lazy" src="absent.jpg" alt="Female" />
+                    <p>Absent</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="btns">
+              <button class="discard">Discard</button>
+              <button class="save-status-btn" data-staff-Id="<%=staff._id%>">
+                Update
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="profile">
+        <div class="staff__dp">
+          <img src="<%=staff.image%>" alt="<%=staff.name%>'s Image" />
+        </div>
+        <section>
+          <div class="details">
+            <div class="loaction icons-content hide">
+              <p>Location</p>
+              <h2 class="faculty__details"><%=staff.location%></h2>
+            </div>
+
+            <div class="mailid icons-content hide">
+              <p>Email</p>
+              <h2 class="faculty__details"><%=staff.email%></h2>
+            </div>
+            <div class="today-status icons-content">
+              <p>Name</p>
+              <div class="nested">
+                <h2 class="faculty__details"><%=staff.name%></h2>
+
+                <%if(staff.status=='present'){%>
+                <img class="status" src="./present.jpg" alt="" />
+                <%}else{%>
+                <img class="status" src="./absent.jpg" alt="" />
+                <%}%>
+              </div>
+            </div>
+            <div class="department icons-content hide">
+              <p>Department</p>
+              <h2 class="faculty__details"><%=staff.department%></h2>
+            </div>
+            <div class="icons-content hide">
+              <p>Experience</p>
+              <h2 class="faculty__details">7+ Years</h2>
+            </div>
+          </div>
+        </section>
+        <div class="fields">
+          <ul>
+            <li class="icons"><i class="fa-solid fa-location-dot"></i></li>
+            <li class="icons"><i class="fa-solid fa-envelope"></i></li>
+            <li class="active icons"><i class="fa-solid fa-user"></i></li>
+            <li class="icons"><i class="fa-solid fa-layer-group"></i></li>
+            <li class="icons"><i class="fa-solid fa-book"></i></li>
+          </ul>
+        </div>
+      </div>
+      <div class="update">
+        <a href="/optimize/<%=staff.id%>"
+          ><button class="optimize">
+            <i class="fa-solid fa-wand-magic-sparkles"></i>
+            <p>optimize</p>
+          </button></a
+        >
+        <a
+          ><button class="status-btn">
+            <i class="fa-solid fa-pen-to-square"></i>
+            <p>Status</p>
+          </button></a
+        >
+      </div>
+      <div class="outer-table">
+        <div class="timetable">
+          <table border="2">
+            <tr>
+              <th class="day">peroid</th>
+              <th>1</th>
+              <th>2</th>
+              <th>3</th>
+              <th>4</th>
+              <th>5</th>
+              <th>6</th>
+              <th>7</th>
+            </tr>
+            <tr>
+              <td class="day">Mon</td>
+              <td><%=staff.monday.firstPeriod %></td>
+              <td><%=staff.monday.secondPeriod %></td>
+              <td><%=staff.monday.thirdPeriod %></td>
+              <td><%=staff.monday.fourthPeriod %></td>
+              <td><%=staff.monday.fifthPeriod %></td>
+              <td><%=staff.monday.sixthPeriod %></td>
+              <td><%=staff.monday.seventhPeriod %></td>
+            </tr>
+            <tr>
+              <td class="day">Tue</td>
+
+              <td><%=staff.tuesday.firstPeriod %></td>
+              <td><%=staff.tuesday.secondPeriod %></td>
+              <td><%=staff.tuesday.thirdPeriod %></td>
+              <td><%=staff.tuesday.fourthPeriod %></td>
+              <td><%=staff.tuesday.fifthPeriod %></td>
+              <td><%=staff.tuesday.sixthPeriod %></td>
+              <td><%=staff.tuesday.seventhPeriod %></td>
+            </tr>
+            <tr>
+              <td class="day">Wed</td>
+              <td><%=staff.wednesday.firstPeriod %></td>
+              <td><%=staff.wednesday.secondPeriod %></td>
+              <td><%=staff.wednesday.thirdPeriod %></td>
+              <td><%=staff.wednesday.fourthPeriod %></td>
+              <td><%=staff.wednesday.fifthPeriod %></td>
+              <td><%=staff.wednesday.sixthPeriod %></td>
+              <td><%=staff.wednesday.seventhPeriod %></td>
+            </tr>
+            <tr>
+              <td class="day">Thu</td>
+              <td><%=staff.thursday.firstPeriod %></td>
+              <td><%=staff.thursday.secondPeriod %></td>
+              <td><%=staff.thursday.thirdPeriod %></td>
+              <td><%=staff.thursday.fourthPeriod %></td>
+              <td><%=staff.thursday.fifthPeriod %></td>
+              <td><%=staff.thursday.sixthPeriod %></td>
+              <td><%=staff.thursday.seventhPeriod %></td>
+            </tr>
+            <tr>
+              <td class="day">Fri</td>
+              <td><%=staff.friday.firstPeriod %></td>
+              <td><%=staff.friday.secondPeriod %></td>
+              <td><%=staff.friday.thirdPeriod %></td>
+              <td><%=staff.friday.fourthPeriod %></td>
+              <td><%=staff.friday.fifthPeriod %></td>
+              <td><%=staff.friday.sixthPeriod %></td>
+              <td><%=staff.friday.seventhPeriod %></td>
+            </tr>
+            <tr>
+              <td class="day">Sat</td>
+              <td><%=staff.saturday.firstPeriod %></td>
+              <td><%=staff.saturday.secondPeriod %></td>
+              <td><%=staff.saturday.thirdPeriod %></td>
+              <td><%=staff.saturday.fourthPeriod %></td>
+              <td><%=staff.saturday.fifthPeriod %></td>
+              <td><%=staff.saturday.sixthPeriod %></td>
+              <td><%=staff.saturday.seventhPeriod %></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="count-body">
+        <div class="count">
+          <div class="pcount">
+            <h3 class="mark pmark"><%=staff.count.totalPresent%></h3>
+            <p>Days Present</p>
+          </div>
+          <div class="acount">
+            <h3 class="mark amark"><%=staff.count.totalAbsent%></h3>
+            <p>Days Absent</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="previous-records">
+      <div class="head">
+        <h3>Show Previous Day Status</h3>
+        <i class="fa-solid fa-angle-up"></i>
+      </div>
+      <div class="tabel-body close">
+        <table border="1">
+          <tr>
+            <th>Date</th>
+            <th>Status</th>
+          </tr>
+
+          <% staff.date.forEach(date => { %>
+          <tr>
+            <td><%= date.split(' ').slice(0,4).join(' ')%></td>
+            <!-- Display only the date portion -->
+            <% if ( date.split(' ')[4] == 'present') { %>
+            <!-- Check if the date exists -->
+            <td>
+              <img src="/present.jpg" alt="" />
+            </td>
+            <% } else { %>
+            <td>
+              <!-- Alternative content if date doesn't exist -->
+              <img src="/absent.jpg" alt="" />
+            </td>
+            <% } %>
+          </tr>
+          <% }); %>
+        </table>
+      </div>
+    </div>
+
+    <div class="msg-container hide">
+      <div class="message"></div>
+    </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        let mode = JSON.parse(localStorage.getItem("mode"));
+        if (mode == "Dark") {
+          document.querySelector(".container").classList.add("dark");
+          document.querySelector("body").style.backgroundColor = "#2e2e2e";
+        } else {
+          document.querySelector(".container").classList.remove("dark");
+          document.querySelector("body").style.backgroundColor = "";
+        }
+      });
+
+      let updateAttendanceBtn = document.querySelector(".save-status-btn");
+      let fields = document.querySelectorAll(".fields ul li");
+
+      let iconContents = document.querySelectorAll(".icons-content");
+      fields.forEach((field, index) => {
+        field.addEventListener("mouseover", () => {
+          addActive(field, index);
+        });
+      });
+
+      function addActive(clikedField, index) {
+        fields.forEach((field) => {
+          field.classList.remove("active");
+        });
+        clikedField.classList.add("active");
+        addHideClass();
+        iconContents[index].classList.remove("hide");
+      }
+      function addHideClass() {
+        iconContents.forEach((item) => item.classList.add("hide"));
+      }
+      let showPreRecord = document.querySelector(".previous-records .head");
+      showPreRecord.addEventListener("click", () => {
+        document.querySelector(".tabel-body").classList.toggle("close");
+        document.querySelector(".fa-angle-up").classList.toggle("down");
+      });
+
+      let statusBtn = document.querySelector(".status-btn");
+      statusBtn.addEventListener("click", () => {
+        document.querySelector("body").classList.add("clock");
+        document.querySelector(".card-cover").classList.remove("hide");
+      });
+
+      let discard = document.querySelector(".discard");
+      discard.addEventListener("click", () => {
+        document.querySelector("body").classList.remove("clock");
+        document.querySelector(".card-cover").classList.add("hide");
+      });
+    </script>
+    <script>
+      function messageCard(data) {
+        document.querySelector(".message").innerHTML = data;
+        document.querySelector(".msg-container").classList.remove("hide");
+        setInterval(() => {
+          document.querySelector(".msg-container").classList.add("hide");
+        }, 5000);
+      }
+
+      function randomColor() {
+        let characters = [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          "a",
+          "b",
+          "c",
+          "d",
+          "e",
+          "f",
+        ];
+        let hexValue = "#";
+        for (let i = 0; i < 6; i++) {
+          hexValue += characters[Math.floor(Math.random() * 16)];
+        }
+        return hexValue;
+      }
+      setInterval(() => {
+        let border = document.querySelector(".outer-border");
+        let randomHex = randomColor();
+        border.style.backgroundColor = randomHex;
+        border.style.boxShadow = `-1px -1px 5px ${randomHex}`;
+      }, 2000);
+
+      //-----------Gender------//
+      let swithcBtn = document.querySelector(".switch");
+      swithcBtn.addEventListener("click", move);
+      function move() {
+        swithcBtn.classList.toggle("move");
+        document
+          .querySelector(".male")
+          .firstElementChild.classList.toggle("move");
+        document
+          .querySelector(".female")
+          .firstElementChild.classList.toggle("round");
+        if (swithcBtn.classList.contains("move")) {
+          document.querySelector("#gender").setAttribute("value", "present");
+        } else {
+          document.querySelector("#gender").setAttribute("value", "absent");
+        }
+      }
+
+      let hoursLabel = document.querySelector(".hour");
+      let minLabel = document.querySelector(".min");
+      let secLabel = document.querySelector(".sec");
+
+      let dateLabel = document.querySelector(".date");
+      let time = new Date();
+      let weeksOfDays = [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+      ];
+
+      dateLabel.innerHTML = time.toDateString();
+
+      setInterval(() => {
+        let time = new Date();
+        hoursLabel.innerHTML =
+          time.getHours() < 10 ? `0${time.getHours()}` : time.getHours();
+        minLabel.innerHTML =
+          time.getMinutes() < 10 ? `0${time.getMinutes()}` : time.getMinutes();
+        secLabel.innerHTML =
+          time.getSeconds() < 10 ? `0${time.getSeconds()}` : time.getSeconds();
+      }, 1000);
+
+      updateAttendanceBtn.addEventListener("click", updateAttendance);
+      async function updateAttendance() {
+        let data = { status: document.querySelector("#gender").value };
+        console.log(data);
+        let id = updateAttendanceBtn.dataset.staffId;
+        let req = await fetch(`/api/v1/myaccount/attendance/${id}`, {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        })
+          .then((res) => res.json())
+          .then((res) => {
+            messageCard(res.message);
+            document.querySelector("body").classList.remove("clock");
+            document.querySelector(".card-cover").classList.add("hide");
+          })
+          .catch((err) => {
+            messageCard(res.message);
+            document.querySelector("body").classList.remove("clock");
+            document.querySelector(".card-cover").classList.add("hide");
+          });
+      }
+    </script>
+  </body>
+</html>

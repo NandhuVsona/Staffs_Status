@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+      user-scalable="no"
+    />
+    <title></title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+
+      font-family: "Poppins", "sanserif";
+    }
+    .container {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .profile__ {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      gap: 15px;
+      width: 100%;
+    }
+    img {
+      width: 100%;
+
+      height: 100%;
+    }
+    .dp__ {
+      width: 150px;
+      border-radius: 50%;
+      background: #ffffff;
+      height: 150px;
+      overflow: hidden;
+    }
+    .facultys__data {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      justify-content: center;
+      align-items: center;
+      padding-top: 10px;
+    }
+    .faculty__name_,
+    .faculty__details_ {
+      text-align: center;
+    }
+    .faculty__details_ {
+      font-size: 18px;
+    }
+    .btns {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-direction: column;
+    }
+    .contact {
+      display: flex;
+      justify-content: space-around;
+      width: 100%;
+      margin: 20px 0px;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      height: 100%;
+      overflow-x: scroll;
+    }
+    td,
+    th {
+      padding: 7px 10px;
+    }
+    table {
+      position: relative;
+      background-color: #fff;
+    }
+    .day {
+      background-color: rgb(208, 216, 230);
+      position: sticky;
+      left: 0;
+      width: 80px;
+    }
+    tr > th {
+      background-color: rgb(208, 216, 230);
+    }
+    #out {
+      background-color: transparent;
+    }
+
+    .container {
+      position: relative;
+    }
+    .timetable {
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 65em;
+      height: 400px;
+    }
+    .outer-table {
+      width: 360px;
+      border: 2px solid rgb(174, 174, 174);
+      border-radius: 10px;
+      overflow-x: scroll;
+      -ms-overflow-style: none; /* IE and Edge */
+      scrollbar-width: none;
+    }
+    .tabs::-webkit-scrollbar {
+      display: none;
+    }
+
+    .today-status {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+
+      height: 50px;
+    }
+
+    .today-status img {
+      width: 30px;
+      height: 30px;
+    }
+    .bold {
+      font-weight: 500;
+      font-size: 18px;
+    }
+    .details__ p {
+      width: 100%;
+      font-size: 15px;
+      text-align: left !important;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .status {
+      border-radius: 50%;
+    }
+    .count-body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .count {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 370px;
+      margin-top: 15px;
+      height: 160px;
+      padding: 10px;
+      gap: 15px;
+    }
+    .pcount,
+    .acount {
+      padding: 5px 15px;
+      font-size: 18px;
+      width: 100%;
+      color: white;
+      border-radius: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 18px;
+      gap: 5px;
+      height: 120px;
+      text-align: center;
+      flex-direction: column;
+    }
+    .pcount p,
+    .acount p {
+      font-weight: bold;
+    }
+
+    .pcount {
+      background-color: #00aeff;
+    }
+    .coutn p {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+    }
+
+    .acount {
+      background-color: #fb3abe;
+    }
+    .mark {
+      background-color: #ffffff;
+      color: #000000;
+      width: 60px;
+      height: 60px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+    }
+    .tabel-body {
+      position: relative;
+    }
+    .tabel-body table th {
+      position: sticky;
+      top: 0;
+      height: 40px;
+      background: linear-gradient(to left, #ff81d7, #6dcffc);
+    }
+
+    @media only screen and (min-width: 576px) {
+      .outer-table {
+        width: 500px;
+      }
+    }
+    @media only screen and (min-width: 755px) {
+      .outer-table {
+        width: 750px;
+      }
+      .details__ p {
+        font-size: 20px;
+      }
+      .profile__ {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 15px;
+        width: 100%;
+      }
+      img {
+        width: 100%;
+        height: 100%;
+      }
+      .dp__ {
+        width: 180px;
+        height: 180px;
+      }
+      .facultys__data {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        justify-content: center;
+        align-items: center;
+        padding-top: 10px;
+      }
+      .faculty__name_,
+      .faculty__details_ {
+        text-align: center;
+        font-size: 20px;
+      }
+      .faculty__details_ {
+        font-size: 18px;
+      }
+      .btns {
+        width: 100%;
+        display: flex;
+
+        flex-direction: column;
+      }
+      .contact {
+        display: flex;
+        justify-content: space-around;
+        width: 60%;
+        margin: 20px 0px;
+      }
+      button {
+        width: 150px;
+        height: 50px;
+
+        font-size: 20px;
+      }
+      .day {
+        background-color: rgb(231, 234, 239);
+      }
+      tr > th {
+        background-color: rgb(224, 226, 228);
+      }
+      tr > td,
+      tr > th {
+        font-size: 20px;
+        padding: 5px 10px;
+      }
+      #out {
+        background-color: transparent;
+      }
+      .today-status {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 50px;
+      }
+      .today-status img {
+        width: 40px;
+        height: 40px;
+      }
+
+      .bold {
+        font-weight: 500;
+        font-size: 20px;
+      }
+      .details__ p {
+        font-size: 20px;
+      }
+      .faculty__name_ {
+        font-size: 30px;
+      }
+      section {
+        display: flex;
+
+        flex-direction: column;
+      }
+    }
+
+    .previous-records {
+      text-align: center;
+      user-select: none;
+
+      padding: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      margin-top: 10px;
+      margin-bottom: 30px;
+    }
+
+    tr img {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+    }
+    .tabel-body {
+      width: 350px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: all 0.3s ease;
+      animation: open 0.3s ease-out forwards;
+      transform-origin: top;
+    }
+
+    @keyframes open {
+      from {
+        transform: translateY(-10px) scaleY(0); /* Add scaleY(0) to make it appear like it's opening from the top */
+        opacity: 0; /* Add opacity 0 in the 'from' keyframe as well */
+      }
+      to {
+        transform: translateY(0) scaleY(1); /* Change to translateY(0) and scaleY(1) to show the full content */
+        opacity: 1; /* Change opacity to 1 to fully reveal the content */
+      }
+    }
+
+    .tabel-body.close {
+      display: none;
+    }
+    .fa-angle-up {
+      transition: all 0.3s ease;
+    }
+    .fa-angle-up.down {
+      transform: rotate(180deg);
+    }
+    .previous-records table tr:nth-child(even) {
+      background-color: #f1f1f1;
+    }
+
+    .fields {
+      margin: 15px 0px 5px 0px;
+      width: 100%;
+
+      height: 50px;
+    }
+    .fields ul {
+      list-style: none;
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      height: 100%;
+    }
+    .fields ul li i {
+      font-size: 25px;
+    }
+    .fields ul li {
+      flex-grow: 1;
+      align-items: center;
+      display: flex;
+      justify-content: center;
+      transition: all 0.15s ease;
+      overflow: hidden;
+    }
+    .fields ul li i {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0.8;
+      color: #242424;
+    }
+    .faculty__details_1 {
+      text-align: center;
+    }
+    .fields ul li.active i {
+      background-color: #dadbdb;
+      background-color: rgb(165, 165, 165);
+      border-bottom: 3px solid;
+      color: #ffffff;
+      animation: rotate 0.3s ease;
+      opacity: 1;
+    }
+    @keyframes rotate {
+      0% {
+        transform: translateY(50px);
+      }
+    }
+
+    .icons-content.hide {
+      display: none;
+    }
+    section {
+      width: 100%;
+      height: 50px;
+    }
+    .icons-content {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+    .nested {
+      display: flex;
+      height: 50px;
+    }
+    button {
+      width: 150px;
+      height: 50px;
+      border: none;
+      font-family: inherit;
+      font-weight: 500;
+
+      background-color: rgb(146, 35, 250);
+      font-size: 18px;
+      color: white;
+      border-radius: 10px;
+    }
+
+    .call {
+      background-color: #f07c23;
+      color: #fff;
+    }
+    .call,
+    .email {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+    }
+    a {
+      text-decoration: none;
+    }
+    .mailid h2 {
+      font-size: 21px;
+    }
+    .container {
+      background-color: #ffffff;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='606' height='606' viewBox='0 0 800 800'%3E%3Cg fill='none' stroke='%23FFF3F7' stroke-width='3.6'%3E%3Cpath d='M769 229L1037 260.9M927 880L731 737 520 660 309 538 40 599 295 764 126.5 879.5 40 599-197 493 102 382-31 229 126.5 79.5-69-63'/%3E%3Cpath d='M-31 229L237 261 390 382 603 493 308.5 537.5 101.5 381.5M370 905L295 764'/%3E%3Cpath d='M520 660L578 842 731 737 840 599 603 493 520 660 295 764 309 538 390 382 539 269 769 229 577.5 41.5 370 105 295 -36 126.5 79.5 237 261 102 382 40 599 -69 737 127 880'/%3E%3Cpath d='M520-140L578.5 42.5 731-63M603 493L539 269 237 261 370 105M902 382L539 269M390 382L102 382'/%3E%3Cpath d='M-222 42L126.5 79.5 370 105 539 269 577.5 41.5 927 80 769 229 902 382 603 493 731 737M295-36L577.5 41.5M578 842L295 764M40-201L127 80M102 382L-261 269'/%3E%3C/g%3E%3Cg fill='%23E1E1E1'%3E%3Ccircle cx='769' cy='229' r='12'/%3E%3Ccircle cx='539' cy='269' r='12'/%3E%3Ccircle cx='603' cy='493' r='12'/%3E%3Ccircle cx='731' cy='737' r='12'/%3E%3Ccircle cx='520' cy='660' r='12'/%3E%3Ccircle cx='309' cy='538' r='12'/%3E%3Ccircle cx='295' cy='764' r='12'/%3E%3Ccircle cx='40' cy='599' r='12'/%3E%3Ccircle cx='102' cy='382' r='12'/%3E%3Ccircle cx='127' cy='80' r='12'/%3E%3Ccircle cx='370' cy='105' r='12'/%3E%3Ccircle cx='578' cy='42' r='12'/%3E%3Ccircle cx='237' cy='261' r='12'/%3E%3Ccircle cx='390' cy='382' r='12'/%3E%3C/g%3E%3C/svg%3E");
+    }
+    .container,
+    body {
+      background-color: #ffffff;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='49' viewBox='0 0 28 49'%3E%3Cg fill-rule='evenodd'%3E%3Cg id='hexagons' fill='%23ececec' fill-opacity='1' fill-rule='nonzero'%3E%3Cpath d='M13.99 9.25l13 7.5v15l-13 7.5L1 31.75v-15l12.99-7.5zM3 17.9v12.7l10.99 6.34 11-6.35V17.9l-11-6.34L3 17.9zM0 15l12.98-7.5V0h-2v6.35L0 12.69v2.3zm0 18.5L12.98 41v8h-2v-6.85L0 35.81v-2.3zM15 0v7.5L27.99 15H28v-2.31h-.01L17 6.35V0h-2zm0 49v-8l12.99-7.5H28v2.31h-.01L17 42.15V49h-2z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .dp__ {
+      box-shadow: -10px -10px 15px rgba(255, 255, 255, 0.5),
+        10px 10px 15px rgba(70, 70, 70, 0.15),
+        inset -10px -10px 15px rgba(255, 255, 255, 0.5),
+        inset 10px 10px 15px rgba(70, 70, 70, 0.15);
+      box-shadow: -10px -10px 15px rgba(255, 255, 255, 0.5),
+        10px 10px 15px rgba(70, 70, 70, 0.15);
+    }
+
+    .container.dark,
+    .container.dark + .count-body + .previous-records header,
+    .container.dark table {
+      background-color: #2e2e2e;
+      color: #ffffff;
+      background-image: none;
+    }
+    .container.dark .dp__ {
+      box-shadow: none;
+    }
+    .container.dark table .day,
+    .container.dark table th {
+      background-color: rgb(101, 101, 101);
+    }
+    .container.dark .icons i {
+      background-color: #fff;
+      color: #000000;
+    }
+    .container.dark .icons.active i {
+      background-color: #00ddff;
+      color: #000000;
+    }
+    img {
+      pointer-events: none;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+  </style>
+
+  <body>
+    <div class="container">
+      <div class="profile__"> 
+        <div class="dp__">
+          <img src="<%=staff.image%>" alt="<%=staff.name%>'s image" />
+        </div>
+        <section>
+          <div class="details">
+            <div class="loaction icons-content hide">
+              <p>Location</p>
+              <h2 class="faculty__details"><%=staff.location%></h2>
+            </div>
+
+            <div class="mailid icons-content hide">
+              <p>Email</p>
+              <h2 class="faculty__details"><%=staff.email%></h2>
+            </div>
+            <div class="today-status icons-content">
+              <p>Name</p>
+              <div class="nested">
+                <h2 class="faculty__details"><%=staff.name%></h2>
+                <%if(staff.status=='present'){%>
+                <img class="status" src="./present.jpg" alt="" />
+                <%}else{%>
+                <img class="status" src="./absent.jpg" alt="" />
+                <%}%>
+              </div>
+            </div>
+            <div class="department icons-content hide">
+              <p>Department</p>
+              <h2 class="faculty__details"><%=staff.department%></h2>
+            </div>
+            <div class="icons-content hide">
+              <p>Experience</p>
+              <h2 class="faculty__details">7+ Years</h2>
+            </div>
+          </div>
+        </section>
+        <div class="fields">
+          <ul>
+            <li class="icons"><i class="fa-solid fa-location-dot"></i></li>
+            <li class="icons"><i class="fa-solid fa-envelope"></i></li>
+            <li class="active icons"><i class="fa-solid fa-user"></i></li>
+            <li class="icons"><i class="fa-solid fa-layer-group"></i></li>
+            <li class="icons"><i class="fa-solid fa-book"></i></li>
+          </ul>
+        </div>
+      </div>
+      <div class="contact">
+        <a
+          href="https://wa.me/+91<%=staff.whatsappNumber%>?text=Hello <%=staff.name%>"
+          ><button class="email">
+            <i style="font-size: 24px" class="fa-brands fa-whatsapp"></i>
+            <p>Message</p>
+          </button></a
+        >
+        <a href="tel:<%=staff.phoneNumber%>"
+          ><button class="call">
+            <i class="fa-solid fa-phone" style="color: #ffffff"></i>
+            <p>Phone</p>
+          </button></a
+        >
+      </div>
+      <div class="outer-table">
+        <div class="timetable">
+          <table border="2">
+            <tr>
+              <th class="day">peroid</th>
+              <th>1</th>
+              <th>2</th>
+              <th>3</th>
+              <th>4</th>
+              <th>5</th>
+              <th>6</th>
+              <th>7</th>
+            </tr>
+            <tr>
+              <td class="day">Mon</td>
+              <td><%=staff.monday.firstPeriod %></td>
+              <td><%=staff.monday.secondPeriod %></td>
+              <td><%=staff.monday.thirdPeriod %></td>
+              <td><%=staff.monday.fourthPeriod %></td>
+              <td><%=staff.monday.fifthPeriod %></td>
+              <td><%=staff.monday.sixthPeriod %></td>
+              <td><%=staff.monday.seventhPeriod %></td>
+            </tr>
+            <tr>
+              <td class="day">Tue</td>
+
+              <td><%=staff.tuesday.firstPeriod %></td>
+              <td><%=staff.tuesday.secondPeriod %></td>
+              <td><%=staff.tuesday.thirdPeriod %></td>
+              <td><%=staff.tuesday.fourthPeriod %></td>
+              <td><%=staff.tuesday.fifthPeriod %></td>
+              <td><%=staff.tuesday.sixthPeriod %></td>
+              <td><%=staff.tuesday.seventhPeriod %></td>
+            </tr>
+            <tr>
+              <td class="day">Wed</td>
+              <td><%=staff.wednesday.firstPeriod %></td>
+              <td><%=staff.wednesday.secondPeriod %></td>
+              <td><%=staff.wednesday.thirdPeriod %></td>
+              <td><%=staff.wednesday.fourthPeriod %></td>
+              <td><%=staff.wednesday.fifthPeriod %></td>
+              <td><%=staff.wednesday.sixthPeriod %></td>
+              <td><%=staff.wednesday.seventhPeriod %></td>
+            </tr>
+            <tr>
+              <td class="day">Thu</td>
+              <td><%=staff.thursday.firstPeriod %></td>
+              <td><%=staff.thursday.secondPeriod %></td>
+              <td><%=staff.thursday.thirdPeriod %></td>
+              <td><%=staff.thursday.fourthPeriod %></td>
+              <td><%=staff.thursday.fifthPeriod %></td>
+              <td><%=staff.thursday.sixthPeriod %></td>
+              <td><%=staff.thursday.seventhPeriod %></td>
+            </tr>
+            <tr>
+              <td class="day">Fri</td>
+              <td><%=staff.friday.firstPeriod %></td>
+              <td><%=staff.friday.secondPeriod %></td>
+              <td><%=staff.friday.thirdPeriod %></td>
+              <td><%=staff.friday.fourthPeriod %></td>
+              <td><%=staff.friday.fifthPeriod %></td>
+              <td><%=staff.friday.sixthPeriod %></td>
+              <td><%=staff.friday.seventhPeriod %></td>
+            </tr>
+            <tr>
+              <td class="day">Sat</td>
+              <td><%=staff.saturday.firstPeriod %></td>
+              <td><%=staff.saturday.secondPeriod %></td>
+              <td><%=staff.saturday.thirdPeriod %></td>
+              <td><%=staff.saturday.fourthPeriod %></td>
+              <td><%=staff.saturday.fifthPeriod %></td>
+              <td><%=staff.saturday.sixthPeriod %></td>
+              <td><%=staff.saturday.seventhPeriod %></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="count-body">
+      <div class="count">
+        <div class="pcount">
+          <h3 class="mark pmark"><%=staff.count.totalPresent%></h3>
+          <p>Days Present</p>
+        </div>
+        <div class="acount">
+          <h3 class="mark amark"><%=staff.count.totalAbsent%></h3>
+          <p>Days Absent</p>
+        </div>
+      </div>
+    </div>
+    <div class="previous-records">
+      <header>
+        <h3>Show Previous Day Status</h3>
+        <i class="fa-solid fa-angle-up"></i>
+      </header>
+      <div class="tabel-body close">
+        <table border="1">
+          <tr>
+            <th>Date</th>
+            <th>Status</th>
+          </tr>
+
+          <% staff.date.forEach(date => { %>
+          <tr>
+            <td><%= date.split(' ')[0] %> <%= date.split(' ')[1] %></td>
+            <!-- Display only the date portion -->
+            <% if (date.split(' ')[2] == 'present') { %>
+            <!-- Check if the date exists -->
+            <td>
+              <img src="/present.jpg" alt="" />
+            </td>
+            <% } else { %>
+            <td>
+              <!-- Alternative content if date doesn't exist -->
+              <img src="/absent.jpg" alt="" />
+            </td>
+            <% } %>
+          </tr>
+          <% }); %>
+        </table>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        let mode = JSON.parse(localStorage.getItem("mode"));
+        if (mode == "Dark") {
+          document.querySelector(".container").classList.add("dark");
+          document.querySelector("body").style.backgroundColor = "#2e2e2e";
+        } else {
+          document.querySelector(".container").classList.remove("dark");
+          document.querySelector("body").style.backgroundColor = "";
+        }
+      });
+      let todayStatus = document.querySelector(".today-status");
+      let todaySwitch = document.querySelector(".today-switch");
+      todayStatus.addEventListener("click", () => {
+        todaySwitch.classList.toggle("absent");
+      });
+
+      let showPreRecord = document.querySelector(".previous-records header");
+      showPreRecord.addEventListener("click", () => {
+        document.querySelector(".tabel-body").classList.toggle("close");
+        document.querySelector(".fa-angle-up").classList.toggle("down");
+      });
+
+      let fields = document.querySelectorAll(".fields ul li");
+
+      let iconContents = document.querySelectorAll(".icons-content");
+      fields.forEach((field, index) => {
+        field.addEventListener("mouseover", () => {
+          addActive(field, index);
+        });
+      });
+
+      function addActive(clikedField, index) {
+        fields.forEach((field) => {
+          field.classList.remove("active");
+        });
+        clikedField.classList.add("active");
+        addHideClass();
+        iconContents[index].classList.remove("hide");
+      }
+      function addHideClass() {
+        iconContents.forEach((item) => item.classList.add("hide"));
+      }
+    </script>
+  </body>
+</html>

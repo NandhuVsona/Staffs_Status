@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+      user-scalable="no"
+    />
+    <title>Settings</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        user-select: none;
+        font-family: "Poppins", "sanserif";
+      }
+      .container.dark,
+      .container.dark .delete-conformation,
+      .container.dark .box-container,
+      .container.dark main a {
+        background-color: #303030 !important;
+        color: #ffffff !important;
+      }
+      .container.dark .box-container .box-body {
+        background-color: #444444 !important;
+      }
+      .container.dark .box-container .box-body .input .icons-input i {
+        color: #232222;
+      }
+      img {
+        pointer-events: none;
+        user-select: none;
+        -webkit-user-drag: none;
+      }
+      :root {
+        --primary: #f2f2f2ed;
+      }
+      body {
+        height: 100vh;
+
+        background-color: rgb(255, 255, 255);
+        padding: 10px;
+      }
+      .container {
+        overflow: hidden;
+        background-color: #ffffff;
+        margin-top: 60px;
+        position: relative;
+        padding-left: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-radius: 30px;
+        animation: up 0.5s ease;
+      }
+      a {
+        text-decoration: none;
+        color: black;
+        width: 100%;
+        height: 70px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 15px;
+        padding-left: 15px;
+        border-bottom: 1px solid rgb(195, 195, 195);
+      }
+      p {
+        font-size: 17px;
+        font-weight: 600;
+      }
+      .container a i {
+        font-size: 25px;
+        color: #8c8c8c;
+      }
+      section {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+      }
+
+      @keyframes rotate {
+        0% {
+          transform: scale(3) rotate(360deg);
+          background: linear-gradient(
+            to bottom left,
+            rgb(4, 79, 241),
+            rgb(54, 231, 166),
+            rgb(132, 0, 247)
+          );
+        }
+      }
+
+      @keyframes up {
+        0% {
+          opacity: 0;
+          transform: translateY(200px);
+        }
+      }
+      a:hover {
+        background-color: rgb(240, 240, 240);
+      }
+      .gender img {
+        animation: none;
+        filter: none;
+      }
+      .gender-box {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        flex-direction: column;
+      }
+      .gender-box img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+      }
+      .gender {
+        text-align: center;
+        width: 100%;
+      }
+      .switch {
+        width: 80px;
+        height: 40px;
+        border-radius: 50px;
+        background-color: rgb(247, 0, 144);
+        position: relative;
+      }
+      .switch::before {
+        content: "";
+        position: absolute;
+        width: 30px;
+        height: 30px;
+
+        left: 55%;
+        top: 5px;
+        background-color: rgb(255, 255, 255);
+        border-radius: 50%;
+        transition: all 0.3s ease;
+      }
+      .switch.move {
+        background-color: rgb(255, 137, 2);
+      }
+      .switch.move::before {
+        left: 5px;
+      }
+      .male img {
+        transition: all 0.3s ease;
+      }
+      .male img.move {
+        border: 5px solid rgb(255, 137, 2);
+      }
+      .female img {
+        border: 5px solid rgb(247, 0, 144);
+        transition: all 0.3s ease;
+      }
+      .female img.round {
+        border: 0px;
+      }
+      .gender {
+        display: flex;
+        width: 100%;
+        align-items: center;
+        justify-content: space-around;
+      }
+
+      .shake {
+        transition: all 0.3s ease;
+        animation: shake 0.3s ease;
+      }
+      @keyframes shake {
+        0% {
+          transform: translateX(0px);
+        }
+        50% {
+          transform: translateX(-5px);
+          border: 2px solid red;
+        }
+        100% {
+          transform: translateX(5px);
+          border: 2px solid red;
+        }
+      }
+      .input-box-name,
+      .input-box-password,
+      .input-box-wapp,
+      .input-box-phone,
+      .input-box-dept,
+      .input-box-gender,
+      .input-box-location,
+      .input-box-desigation {
+        width: 100%;
+        height: 100vh;
+        background-color: rgb(255, 255, 255);
+        display: none;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .box-body {
+        font-size: 18px;
+        padding: 20px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        position: absolute;
+        background-color: rgb(229, 229, 229) !important;
+        top: 0px;
+        left: 0;
+        z-index: 1;
+        border-radius: 5px;
+      }
+      .input-box-name.show .box-body,
+      .input-box-location.show .box-body,
+      .input-box-desigation.show .box-body,
+      .input-box-password.show .box-body,
+      .input-box-wapp.show .box-body,
+      .input-box-dept.show .box-body,
+      .input-box-gender.show .box-body,
+      .input-box-phone.show .box-body {
+        animation: down 0.5s ease;
+      }
+
+      @keyframes down {
+        0% {
+          opacity: 0;
+          transform: translateY(-200px);
+        }
+      }
+      .box-body .input {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
+      .box-body .input input {
+        height: 50px;
+        padding-left: 10px;
+        border: none;
+        width: 100%;
+        font-size: 20px;
+        font-weight: 500;
+      }
+      input:focus {
+        outline: none;
+      }
+      .btns {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+      }
+      .btns button {
+        width: 100%;
+        height: 50px;
+        border-radius: 5px;
+        font-weight: 600;
+        font-size: 16px;
+        border: none;
+        background-color: #fff;
+      }
+
+      .input-box-name.show,
+      .input-box-password.show,
+      .input-box-dept.show,
+      .input-box-wapp.show,
+      .input-box-phone.show,
+      .input-box-location.show,
+      .input-box-gender.show,
+      .input-box-desigation.show {
+        display: flex;
+      }
+      .input-box-name.show + .input-box-password + main,
+      .input-box-password.show + main {
+        display: none;
+      }
+      .icons-input {
+        background-color: #ffffff;
+        border: 1px solid groove;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 5px;
+        width: 100%;
+        padding-left: 15px;
+      }
+      .icons-input i {
+        font-size: inherit;
+      }
+      main {
+        width: 100vw;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+      }
+      .fa-angle-right {
+        position: absolute;
+        right: 25px;
+        color: #a6a6a6 !important;
+      }
+      header {
+        position: absolute;
+        top: 0;
+        color: #ffffff;
+        left: 0;
+        height: 50dvh;
+        width: 100%;
+        padding-left: 10px;
+        background: linear-gradient(
+          to bottom left,
+          rgb(255, 183, 0),
+          rgb(239, 0, 247)
+        );
+        border-radius: 0px 0px 30px 30px;
+        display: flex;
+        justify-content: flex-start;
+        animation: down 0.3s ease;
+      }
+
+      .profile {
+        width: 50px;
+        height: 50px;
+        overflow: hidden;
+        border-radius: 50%;
+      }
+      img {
+        width: 100%;
+        filter: saturate(0) brightness(0.9) invert(0);
+        animation: rotate 0.5s ease;
+      }
+      .head-body {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        height: 67px;
+        gap: 5px;
+      }
+      body {
+        position: relative;
+      }
+
+      .msg-container {
+        width: 100%;
+        display: flex;
+
+        justify-content: center;
+        align-items: center;
+
+        position: absolute;
+        bottom: 50px;
+        padding: 10px;
+        gap: 10px;
+        left: 0;
+        animation: msg 1s ease;
+        overflow: hidden;
+      }
+      .msg-container .msg-body {
+        background-color: aqua;
+        display: inline-block;
+        padding: 15px 20px;
+        border-radius: 10px;
+      }
+      .msg-container i {
+        font-size: 25px;
+      }
+      @keyframes msg {
+        0% {
+          opacity: 0;
+          transform: translateY(150px);
+        }
+      }
+      .msg-container.hide {
+        display: none;
+      }
+      .delete-conformation.show {
+        display: flex;
+      }
+      .delete-conformation.show + main {
+        visibility: hidden;
+        overflow: hidden;
+      }
+      body.reduceHeight .container {
+        height: 90vh;
+        overflow: hidden;
+      }
+      .delete-conformation {
+        display: none;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        width: 100%;
+        left: 0;
+        height: 100%;
+        background-color: #ffffff;
+        text-align: center;
+        z-index: 1;
+        top: -100px;
+        overflow: hidden;
+        transform: all 0.3s ease;
+        animation: up 0.3s ease alternate;
+      }
+
+      .delete-conformation .top {
+        width: 150px;
+        height: 150px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        animation: shake 1s ease infinite alternate;
+        transform-origin: bottom;
+      }
+      @keyframes shake {
+        0% {
+          transform: scale(1.07);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+
+      .delete-conformation .top img {
+        filter: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        animation: none;
+      }
+      .delete-body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+      .conf-btns {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+
+        width: 100%;
+        padding: 25px 10px 10px 10px;
+        gap: 15px;
+      }
+      .conf-btns button {
+        width: 100%;
+        height: 55px;
+        border-radius: 5px;
+        font-size: 18px;
+        font-weight: 700;
+        border: none;
+      }
+      .conf-btns button:active,
+      .conf-btns button:hover {
+        transform: scale(0.98);
+      }
+      .confirm-msg p {
+        font-weight: normal;
+      }
+      .okay-delete {
+        color: #ffffff;
+        background-color: red;
+      }
+      .cancel-delete {
+        color: #ffffff;
+        background-color: orange;
+      }
+      .form-group {
+        width: 100%;
+      }
+      .box-body {
+        background-color: cornflowerblue;
+        width: 100%;
+      }
+      .gender {
+        gap: 10px !important;
+      }
+      .box-body {
+        gap: 10px;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="head-body">
+        <div class="profile">
+          <img loading="lazy" src="/gear.png" alt="" />
+        </div>
+        <h2>Settings</h2>
+      </div>
+    </header>
+    <div class="container">
+      <div class="input-box-name box-container">
+        <div class="box-body">
+          <div class="input">
+            <label for="name">Enter your name</label>
+            <div class="icons-input">
+              <i class="fa-solid fa-user"></i>
+              <input type="text" id="name" value="<%=staff.name%>" />
+            </div>
+          </div>
+          <div class="btns">
+            <button class="discard">Discard</button>
+            <button class="save-name-btn" data-staff-Id="<%=staff._id%>">
+              Save
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="input-box-password box-container">
+        <div class="box-body">
+          <div class="input">
+            <label for="old-password">Enter your old Password</label>
+            <input type="text" id="old-password" />
+          </div>
+          <div class="input">
+            <label for="new-password">New Password</label>
+            <input type="text" id="new-password" />
+          </div>
+          <div class="input">
+            <label for="confirm-password">Confirm Password</label>
+            <input type="text" id="confirm-password" />
+          </div>
+          <div class="btns">
+            <button class="discard">Discard</button>
+            <button class="update-password" data-staff-Id="<%=staff._id%>">
+              Save
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="input-box-wapp box-container">
+        <div class="box-body">
+          <div class="input">
+            <label for="wapp">Enter your whatsapp number</label>
+            <div class="icons-input">
+              <i class="fa-brands fa-whatsapp"></i>
+              <input type="tell" id="wapp" />
+            </div>
+          </div>
+          <div class="btns">
+            <button class="discard">Discard</button>
+            <button class="wapp-no-save-btn" data-staff-Id="<%=staff._id%>">
+              Save
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="input-box-phone box-container">
+        <div class="box-body">
+          <div class="input">
+            <label for="phone">Enter your Phone number</label>
+            <div class="icons-input">
+              <i class="fa-solid fa-phone-volume"></i>
+              <input type="tell" id="phone" />
+            </div>
+          </div>
+          <div class="btns">
+            <button class="discard">Discard</button>
+            <button class="phone-no-save-btn" data-staff-Id="<%=staff._id%>">
+              Save
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="input-box-location box-container">
+        <div class="box-body">
+          <div class="input">
+            <label for="loactionbox">Enter your Location</label>
+            <div class="icons-input">
+              <i class="fa-solid fa-location-dot"></i>
+              <input type="text" id="locationbox" value="<%=staff.location%>" />
+            </div>
+          </div>
+          <div class="btns">
+            <button class="discard">Discard</button>
+            <button class="save-location-btn" data-staff-Id="<%=staff._id%>">
+              Save
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="input-box-desigation box-container">
+        <div class="box-body">
+          <div class="input">
+            <label for="desigation">Enter your Desigation</label>
+            <div class="icons-input">
+              <i class="fa-solid fa-user"></i>
+              <input type="text" id="desigation" value="<%=staff.position%>" />
+            </div>
+          </div>
+          <div class="btns">
+            <button class="discard">Discard</button>
+            <button class="save-desigation-btn" data-staff-Id="<%=staff._id%>">
+              Save
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="input-box-dept box-container">
+        <div class="box-body">
+          <div class="input">
+            <label for="deptbox">Enter your department</label>
+            <div class="icons-input">
+              <i class="fa-solid fa-location-crosshairs"></i>
+              <input type="text" id="deptbox" value="<%=staff.department%>" />
+            </div>
+          </div>
+          <div class="btns">
+            <button class="discard">Discard</button>
+            <button class="save-dept-btn" data-staff-Id="<%=staff._id%>">
+              Save
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="input-box-gender box-container">
+        <div class="box-body">
+          <div class="form-group">
+            <input
+              type="text"
+              value="female"
+              name="gender"
+              id="gender"
+              hidden
+            />
+            <div class="gender-box">
+              <div class="gender">
+                <div class="male">
+                  <img loading="lazy" class="img" src="male.png" alt="Male" />
+                  <p>Male</p>
+                </div>
+                <div class="switch"></div>
+                <div class="female">
+                  <img loading="lazy" src="female.png" alt="Female" />
+                  <p>Female</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="btns">
+            <button class="discard">Discard</button>
+            <button class="save-gender-btn" data-staff-Id="<%=staff._id%>">
+              Save
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="delete-conformation">
+        <div class="delete-body">
+          <div class="top">
+            <img loading="lazy" src="./deleteIcon.png" alt="" />
+          </div>
+          <div class="confirm-msg">
+            <h2>Are You Sure?</h2>
+            <p>
+              Do you want't to delete your account ? Your accout can't be
+              restore
+            </p>
+          </div>
+          <div class="conf-btns">
+            <button class="cancel-delete">Cancel</button>
+            <button data-staff-Id="<%=staff._id%>" class="okay-delete">
+              Okay
+            </button>
+          </div>
+        </div>
+      </div>
+      <main>
+        <a id="inputbox">
+          <i class="fa-solid fa-user-pen"></i>
+          <section>
+            <p class="staff-name"><%=staff.name%></p>
+            <small>Tap to edit your name.</small>
+          </section>
+
+          <i class="fa-solid fa-angle-right"></i>
+        </a>
+        <a id="change-password">
+          <i class="fa-solid fa-lock"></i>
+          <section>
+            <p>Change Password</p>
+            <small>Want to change your password ?</small>
+          </section>
+          <i class="fa-solid fa-angle-right"></i>
+        </a>
+        <a id="gender-label">
+          <i class="fa-solid fa-people-group"></i>
+          <section>
+            <p>Gender</p>
+            <small class="gender-small-label"><%=staff.gender%></small>
+          </section>
+          <i class="fa-solid fa-angle-right"></i>
+        </a>
+        <a id="wapp-number">
+          <i class="fa-brands fa-whatsapp"></i>
+          <section>
+            <p>Whatapp Number</p>
+            <small class="wapp-number-label"><%=staff.whatsappNumber%></small>
+          </section>
+          <i class="fa-solid fa-angle-right"></i>
+        </a>
+        <a id="phone-number">
+          <i class="fa-solid fa-phone-volume"></i>
+          <section>
+            <p>Phone Number</p>
+            <small class="phone-number-label"><%=staff.phoneNumber%></small>
+          </section>
+          <i class="fa-solid fa-angle-right"></i>
+        </a>
+        <a id="location">
+          <i class="fa-solid fa-location-crosshairs"></i>
+          <section>
+            <p>Location</p>
+            <small class="location-small-label"><%=staff.location%></small>
+          </section>
+          <i class="fa-solid fa-angle-right"></i>
+        </a>
+        <a id="position">
+          <i class="fa-solid fa-wand-magic-sparkles"></i>
+          <section>
+            <p>Desigation</p>
+            <small class="desigation-small-lable"><%=staff.position%></small>
+          </section>
+          <i class="fa-solid fa-angle-right"></i>
+        </a>
+        <a id="dept">
+          <i class="fa-solid fa-layer-group"></i>
+          <section>
+            <p>Department</p>
+            <small class="dept-label"><%=staff.department%></small>
+          </section>
+          <i class="fa-solid fa-angle-right"></i>
+        </a>
+        <a href="">
+          <i class="fa-solid fa-shield-halved"></i>
+          <section>
+            <p>Terms & conditions</p>
+            <small>Tap to read the terms & conditions</small>
+          </section>
+          <i class="fa-solid fa-angle-right"></i>
+        </a>
+        <a id="delete">
+          <i class="fa-solid fa-trash-can"></i>
+          <section>
+            <p>Delete Account</p>
+            <small>Permenentaly delete your acccount</small>
+          </section>
+          <i class="fa-solid fa-angle-right"></i>
+        </a>
+        <a id="logout">
+          <i class="fa-solid fa-right-from-bracket"></i>
+          <section>
+            <p>Logout</p>
+            <small>Logout of your account</small>
+          </section>
+          <i class="fa-solid fa-angle-right"></i>
+        </a>
+      </main>
+    </div>
+    <div class="msg-container hide">
+      <div class="msg-body">
+        <i class="fa-regular fa-circle-check"></i>
+        <b class="msg-box">Successfully Updated.!</b>
+      </div>
+    </div>
+    <script src="settings.js"></script>
+  </body>
+</html>

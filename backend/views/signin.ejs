@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+      user-scalable="no"
+    />
+    <title>Staffs Status</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <style>
+    :root {
+      --primary-color: orange;
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", "sanserif";
+      user-select: none;
+    }
+    .loginpage {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      position: relative;
+      flex-direction: column;
+    }
+    form {
+      width: 360px;
+      font-size: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      gap: 20px;
+      padding: 0px 5px;
+    }
+    .name,
+    .password {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    label {
+      font-size: 18px;
+      margin-bottom: 10px;
+      margin-left: 5px;
+      font-weight: 600;
+    }
+    input,
+    button {
+      width: 100%;
+      height: 53px;
+      border-radius: 5px;
+      border: 1px solid;
+      padding-left: 20px;
+      font-size: 20px;
+    }
+    button {
+      margin-top: 10px;
+      font-family: inherit;
+      background-color: var(--primary-color);
+      padding-left: 0;
+      color: #2b2b2b;
+      border: none;
+      font-weight: 500;
+    }
+    .icon-input {
+      display: flex;
+      border: 1px solid;
+      width: 100%;
+      justify-content: center;
+      align-items: center;
+      padding-left: 15px;
+      overflow: hidden;
+      border-radius: 5px;
+      -webkit-border-radius: 5px;
+      -moz-border-radius: 5px;
+      -ms-border-radius: 5px;
+      -o-border-radius: 5px;
+    }
+    i {
+      font-size: 21px;
+    }
+    input {
+      width: 100%;
+      height: 53px;
+      border: none;
+      padding-left: 13px;
+      font-size: 18px;
+    }
+    input:focus {
+      outline: none;
+    }p{
+      font-size: 18px;
+    }
+  </style>
+  <body>
+    <div class="loginpage">
+      <h1>LOGIN</h1>
+      <%if(locals.msg){%>
+      <p><%=msg%></p>
+      <%}%>
+      <form method="post" action="/" class="form" autocomplete="off">
+        <div class="name">
+          <label for="">Email</label>
+          <div class="icon-input">
+            <i class="fa-solid fa-user"></i>
+            <input name="email" type="text" placeholder="Enter Your Email" />
+          </div>
+        </div>
+        <div class="password">
+          <label for="">Password</label>
+          <div class="icon-input">
+            <i class="fa-solid fa-lock"></i>
+            <input
+              name="password"
+              class="pass"
+              type="text"
+              required
+              placeholder="Enter Your Password"
+            />
+          </div>
+        </div>
+        <button class="submit">Verify</button>
+        <p>Don't have an account <a href="/signup">create</a></p>
+      </form>
+    </div>
+  </body>
+</html>

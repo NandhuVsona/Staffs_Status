@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+      user-scalable="no"
+    />
+    <title>Staffs Status</title>
+    <link rel="icon" type="image/x-icon" href="public/logo.jpg" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="home.css" />
+  </head>
+  <style>
+    .logo {
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #ffffff;
+      z-index: 10;
+    }
+    .logo-body {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+    .logo-body img {
+      width: 150px;
+      height: 150px;
+      transition: all 0.3s ease;
+      animation: logoanimation 1s ease;
+    }
+    .logo-body h2 {
+      color: rgb(41, 41, 41);
+      word-spacing: 5px;
+      animation: title 1s ease;
+    }
+
+    @keyframes logoanimation {
+      0% {
+        transform: scale(0) rotate(30deg);
+      }
+    }
+    @keyframes title {
+      0% {
+        opacity: 0;
+        transform: translateY(150px);
+      }
+    }
+    .logo.visited {
+      display: none;
+    }
+    .container {
+      animation: opacity 1s ease;
+    }
+    @keyframes opacity {
+      0% {
+        opacity: 0;
+      }
+    }
+    img {
+      pointer-events: none;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+
+    body .search-page.active + .logo + .container {
+      margin-top: 25px;
+    }
+    body .search-page.active + .logo + .container .tabs {
+      width: 0%;
+      height: 0%;
+      display: none;
+    }
+    .search__bar {
+      display: none;
+    }
+    body .search-page.active + .logo + .container header {
+      overflow: hidden;
+      padding-bottom: 10px;
+    }
+    body .search-page.active + .logo + .container header+.homepage {
+      display: none;
+    }
+    body .search-page.active + .logo + .container header+.homepage.index {
+      display: flex;
+    }
+    body .search-page.active + .logo + .container header .search__bar {
+      display: flex;
+      animation: searchBarDown 0.3s ease;
+    }
+    @keyframes searchBarDown {
+      0% {
+  
+       width: 0;
+        
+      }
+    
+     
+    }
+  </style>
+
+  <body>
+    <div class="search-page">
+      <div class="search-container"></div>
+    </div>
+    <div class="logo">
+      <div class="logo-body">
+        <img loading="lazy" src="./logo.png" alt="logo" />
+        <h2>STAFFS STATUS</h2>
+      </div>
+    </div>
+    <div class="container home hide">
+      <header>
+        <div class="title">
+          <h3><i class="fa-solid fa-hands-holding-child"></i> Staffs Status</h3>
+          <div class="icons">
+            <div class="search-icon">
+              <i class="fa-solid fa-magnifying-glass"></i>
+              <!-- <i  class="fa-solid fa-xmark remove search-cancel"></i> -->
+            </div>
+            <div class="theme">
+              <i class="fa-solid fa-moon" style="color: #ffffff"></i>
+
+              <i class="fa-solid fa-sun" style="color: #ffffff"></i>
+            </div>
+
+            <div class="bar">
+              <i class="fa-solid fa-bars menu" style="color: #ffffff"></i>
+              <i
+                class="fa-solid fa-xmark close hide"
+                style="color: #ffffff"
+              ></i>
+            </div>
+          </div>
+        </div>
+        <div class="options hide">
+          <ul>
+            <a href="/myaccount">
+              <li>
+                <i class="fa-solid fa-user"></i>
+                My Account
+              </li></a
+            >
+            <a href="/dashboard"
+              ><li><i class="fa-solid fa-chart-simple"></i> Dashboard</li></a
+            >
+
+            <a href="?gender=male"
+              ><li><i class="fa-solid fa-mars"></i> Male Staffs</li></a
+            >
+            <a href="?gender=female"
+              ><li><i class="fa-solid fa-venus"></i> Female Staffs</li></a
+            >
+            <a href="/internal-mark-calculator"
+              ><li><i class="fa-solid fa-calculator"></i> Internal Calc</li></a
+            >
+
+            <a onclick="visit()"
+              ><li>
+                <i class="fa-solid fa-share"></i>
+                Invite a friend
+              </li></a
+            >
+            <a href="/settings"
+              ><li>
+                <i class="fa-solid fa-gear"></i>
+                Setttings
+              </li></a
+            >
+          </ul>
+        </div>
+        <div class="search__bar">
+          <input autofocus
+            type="text"
+            placeholder="Search Staffs"
+            class="search-input-box"
+          />
+        </div>
+
+        <div class="tabs">
+          <div class="tab_bar">
+            <div class="active">ALL</div>
+            <div>
+              <i class="fa-solid fa-microchip"></i>
+              <p>ECE</p>
+            </div>
+            <div>
+              <i class="fa-solid fa-code"></i>
+              <p>CSE</p>
+            </div>
+            <div>
+              <i class="fa-solid fa-plug"></i>
+              <p>EEE</p>
+            </div>
+            <div>
+              <i class="fa-solid fa-gear"></i>
+              <p>MECH</p>
+            </div>
+            <div>
+              <i class="fa-solid fa-house-chimney"></i>
+              <p>CIVIL</p>
+            </div>
+            <div>
+              <i class="fa-solid fa-laptop-code"></i>
+              <p>IT</p>
+            </div>
+            <div>
+              <i class="fa-regular fa-folder-open"></i>
+              <p>AIDS</p>
+            </div>
+            <div>
+              <i class="fa-solid fa-user"></i>
+              <p>AIML</p>
+            </div>
+            <div>
+              <i class="fa-brands fa-figma"></i>
+              <p>CSD</p>
+            </div>
+            <div>
+              <i class="fa-solid fa-robot"></i>
+              <p>MCT</p>
+            </div>
+            <div>
+              <i class="fa-solid fa-wave-square"></i>
+              <p>BME</p>
+            </div>
+            <div>
+              <i class="fa-solid fa-shirt"></i>
+              <p>FT</p>
+            </div>
+          </div>
+        </div>
+      </header>
+      <div class="homepage index">
+        <div class="skeleton-loading"></div>
+        <div class="facultys__list">
+          <%if(locals.staffs.length>=1){%> <% staffs.forEach(staff =>{ %>
+          <a href="/overview/<%=staff._id%>">
+            <div class="profile">
+              <div class="dp">
+                <% if (staff.image) { %>
+                <img
+                  loading="lazy"
+                  src="uploads/<%=staff.image%>"
+                  alt="<%=staff.name%> img"
+                />
+                <% } else { %>
+                <img loading="lazy" src="dp.jpg" alt="<%=staff.name%> img" />
+                <% } %>
+              </div>
+              <div class="details">
+                <h4 class="faculty__name"><%=staff.name%></h4>
+                <p class="faculty__details">
+                  <%=staff.position%> in <%=staff.department%>
+                </p>
+              </div>
+            </div>
+          </a>
+          <% }) %> <%}else{%>
+          <div class="no-content">
+            <p>Staffs Not Avaliable.!</p>
+          </div>
+          <%}%>
+        </div>
+      </div>
+
+      <div class="homepage">
+        <div class="skeleton-loading"></div>
+        <div class="ECE_facultys__list"></div>
+      </div>
+      <div class="homepage">
+        <div class="skeleton-loading"></div>
+        <div class="CSE_facultys__list"></div>
+      </div>
+      <div class="homepage">
+        <div class="skeleton-loading"></div>
+        <div class="EEE_facultys__list"></div>
+      </div>
+      <div class="homepage">
+        <div class="skeleton-loading"></div>
+        <div class="MECH_facultys__list"></div>
+      </div>
+      <div class="homepage">
+        <div class="skeleton-loading"></div>
+        <div class="CIVIL_facultys__list"></div>
+      </div>
+      <div class="homepage">
+        <div class="skeleton-loading"></div>
+        <div class="IT_facultys__list"></div>
+      </div>
+      <div class="homepage">
+        <div class="skeleton-loading"></div>
+        <div class="AIDS_facultys__list"></div>
+      </div>
+      <div class="homepage">
+        <div class="skeleton-loading"></div>
+        <div class="AIML_facultys__list"></div>
+      </div>
+      <div class="homepage">
+        <div class="skeleton-loading"></div>
+        <div class="CSD_facultys__list"></div>
+      </div>
+      <div class="homepage">
+        <div class="skeleton-loading"></div>
+        <div class="MCT_facultys__list"></div>
+      </div>
+      <div class="homepage">
+        <div class="skeleton-loading"></div>
+        <div class="BME_facultys__list"></div>
+      </div>
+      <div class="homepage">
+        <div class="skeleton-loading"></div>
+        <div class="FT_facultys__list"></div>
+      </div>
+    </div>
+    <script>
+      let logoPage = document.querySelector(".logo");
+
+      let isVisited = sessionStorage.getItem("isVisited");
+
+      if (!isVisited) {
+        setTimeout(() => {
+          sessionStorage.setItem("isVisited", "true");
+          logoPage.classList.add("visited");
+          document.querySelector(".container").classList.remove("hide");
+        }, 2000);
+      } else {
+        logoPage.classList.add("visited");
+        document.querySelector(".container").classList.remove("hide");
+      }
+      async function visit() {
+        const shareData = {
+          title: "Check out this Website!",
+          text: "I found this website useful and wanted to share it with you.",
+          url: "https://staffs-status-7rwi.onrender.com",
+        };
+        try {
+          if (navigator.share) {
+            await navigator.share(shareData);
+            alert("Thanks for sharing.!");
+          }
+        } catch (err) {
+          console.log(err);
+        }
+      }
+
+     
+    </script>
+
+    <script type="module" src="home.js"></script>
+  </body>
+</html>

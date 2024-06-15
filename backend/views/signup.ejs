@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+      user-scalable="no"
+    />
+    <title>SingUp</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <style>
+    .gender-box {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+      flex-direction: column;
+      margin-top: 20px;
+    }
+    .gender-box img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+    }
+    .gender {
+      text-align: center;
+      width: 100%;
+    }
+    .switch {
+      width: 80px;
+      height: 40px;
+      border-radius: 50px;
+      background-color: rgb(2, 175, 255);
+      position: relative;
+    }
+    .switch::before {
+      content: "";
+      position: absolute;
+      width: 30px;
+      height: 30px;
+
+      left: 55%;
+      top: 5px;
+      background-color: rgb(255, 255, 255);
+      border-radius: 50%;
+      transition: all 0.3s ease;
+    }
+    .switch.move {
+      background-color: rgb(6, 255, 2);
+    }
+    .switch.move::before {
+      left: 5px;
+    }
+    .male img {
+      transition: all 0.3s ease;
+    }
+    .male img.move {
+      border: 5px solid rgb(6, 255, 2);
+    }
+    .female img {
+      border: 5px solid rgb(2, 175, 255);
+      transition: all 0.3s ease;
+    }
+    .female img.round {
+      border: 0px;
+    }
+    .gender {
+      display: flex;
+      width: 100%;
+      align-items: center;
+      justify-content: space-around;
+    }
+
+    .shake {
+      transition: all 0.3s ease;
+      animation: shake 0.3s ease;
+    }
+    @keyframes shake {
+      0% {
+        transform: translateX(0px);
+      }
+      50% {
+        transform: translateX(-5px);
+        border: 2px solid red;
+      }
+      100% {
+        transform: translateX(5px);
+        border: 2px solid red;
+      }
+    }
+    i {
+      color: #13131399;
+    }
+    input[type="file"] {
+      visibility: hidden;
+      height: 50px;
+    }
+    input[type="file"] + label {
+      width: 100%;
+      margin-bottom: 15px;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: none;
+      background-color: #b13bff;
+      color: #ffffff;
+      text-align: center;
+      border-radius: 5px;
+      -webkit-border-radius: 5px;
+      -moz-border-radius: 5px;
+      -ms-border-radius: 5px;
+      -o-border-radius: 5px;
+    }
+    input[type="file"] + label i {
+      color: white;
+      margin-right: 5px;
+    }
+    
+  </style>
+  <body>
+    <div class="container">
+      <!-- <div class="error">
+        <%if(locals.msg){%>
+        <p><%=msg%></p>
+        <%}%>
+      </div> -->
+      <header>
+        <h1>Register</h1>
+        <div class="progress">
+          <div class="progress-line"></div>
+          <div class="progress-steps active">1</div>
+          <div class="progress-steps">2</div>
+          <div class="progress-steps">3</div>
+          <!-- <div class="progress-steps">4</div> -->
+        </div>
+      </header>
+
+      <form action="/home" method="POST" enctype="multipart/form-data">
+        <div class="form-page active">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <div class="icon-input">
+              <i class="fa-solid fa-user"></i>
+              <input
+                type="text"
+                name="name"
+                id="name"
+              
+                placeholder="Enter Your Name"
+              />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <div class="icon-input">
+              <i class="fa-solid fa-envelope"></i>
+              <input
+                type="email"
+                name="email"
+               
+                id="email"
+                placeholder="Enter Your Email"
+              />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <div class="icon-input">
+              <i class="fa-solid fa-lock"></i>
+              <input
+                type="password"
+                name="password"
+                id="password"
+               
+                maxlength="8"
+                placeholder="Enter Your Password"
+              />
+            </div>
+          </div>
+          <button class="nextbtn">Next</button>
+          <p>Already have an account ? <a href="/">login</a></p>
+        </div>
+
+        <div class="form-page">
+          <div class="form-group">
+            <label for="department">Department</label>
+            <div class="icon-input">
+              <i class="fa-solid fa-layer-group"></i>
+              <input
+                type="text"
+                name="department"
+                id="department"
+                placeholder="Enter The Department"
+              />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="position">Designation</label>
+            <div class="icon-input">
+              <i class="fa-solid fa-wand-magic-sparkles"></i>
+              <input
+                type="text"
+                name="position"
+                id="position"
+                placeholder="Assistant or associative prof"
+              />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="location"> Location</label>
+            <div class="icon-input">
+              <i class="fa-solid fa-location-dot"></i>
+              <input
+                type="text"
+                name="location"
+                id="location"
+                placeholder="like ECE dept 2nd floor"
+              />
+            </div>
+          </div>
+          <div class="btns">
+            <button class="pretbtn">previous</button>
+            <button class="nextbtn">NEXT</button>
+          </div>
+        </div>
+
+        <div class="form-page">
+          <div class="form-group">
+            <input
+              type="text"
+              value="female"
+              name="gender"
+              id="gender"
+              hidden
+            />
+            <div class="gender-box">
+              <div class="gender">
+                <div class="male">
+                  <img loading="lazy" class="img" src="male.png" alt="Male" />
+                  <p>Male</p>
+                </div>
+                <div class="switch"></div>
+                <div class="female">
+                  <img loading="lazy" src="female.png" alt="Female" />
+                  <p>Female</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <input type="file" name="profile" id="profile" />
+            <label for="profile"
+              ><i class="fa-solid fa-image"></i>Upload Image</label
+            >
+          </div>
+          <div class="btns">
+            <button class="pretbtn">previous</button>
+            <button style="color: black" type="submit" class="submit">
+              Submit
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <script></script>
+
+    <script src="script.js"></script>
+  </body>
+</html>
