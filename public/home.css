@@ -38,7 +38,7 @@ header {
   gap: 12px;
   background-color: rgb(72, 71, 71);
 
-  background: linear-gradient(
+  //background: linear-gradient(
     to bottom left,
     rgb(182, 4, 241),
     rgb(218, 128, 2),
