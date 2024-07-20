@@ -31,11 +31,12 @@
       font-family: "Poppins", "sanserif";
     }
     .container {
-      margin-top: 20px;
+      padding-top: 20px;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
+      position: relative;
     }
     .profile__ {
       display: flex;
@@ -56,6 +57,40 @@
       background: #ffffff;
       height: 150px;
       overflow: hidden;
+      z-index: 2;
+      border-bottom: 10px thick;
+    }
+    .dp__ img {
+      padding: 10px;
+      border-radius: 50%;
+    }
+
+    .banner {
+      position: absolute;
+      top: 0px;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1;
+      height: 100px;
+      animation: down 0.3s ease;
+      transition: all 0.3s ease;
+      border-radius: 0px 0px 40px 40px;
+      transform-origin: center;
+      background: linear-gradient(
+        to bottom left,
+        rgb(255, 149, 0),
+        rgb(174, 0, 255)
+      );
+    }
+    @keyframes down {
+      from {
+        opacity: 0;
+        width: 0;
+        transform: translateX(100px);
+      }
     }
     .facultys__data {
       display: flex;
@@ -255,6 +290,7 @@
         gap: 15px;
         width: 100%;
       }
+
       img {
         width: 100%;
         height: 100%;
@@ -499,14 +535,14 @@
       background-color: #ffffff;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='49' viewBox='0 0 28 49'%3E%3Cg fill-rule='evenodd'%3E%3Cg id='hexagons' fill='%23ececec' fill-opacity='1' fill-rule='nonzero'%3E%3Cpath d='M13.99 9.25l13 7.5v15l-13 7.5L1 31.75v-15l12.99-7.5zM3 17.9v12.7l10.99 6.34 11-6.35V17.9l-11-6.34L3 17.9zM0 15l12.98-7.5V0h-2v6.35L0 12.69v2.3zm0 18.5L12.98 41v8h-2v-6.85L0 35.81v-2.3zM15 0v7.5L27.99 15H28v-2.31h-.01L17 6.35V0h-2zm0 49v-8l12.99-7.5H28v2.31h-.01L17 42.15V49h-2z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
     }
-    .dp__ {
+    /* .dp__ {
       box-shadow: -10px -10px 15px rgba(255, 255, 255, 0.5),
         10px 10px 15px rgba(70, 70, 70, 0.15),
         inset -10px -10px 15px rgba(255, 255, 255, 0.5),
         inset 10px 10px 15px rgba(70, 70, 70, 0.15);
       box-shadow: -10px -10px 15px rgba(255, 255, 255, 0.5),
         10px 10px 15px rgba(70, 70, 70, 0.15);
-    }
+    }*/
 
     .container.dark,
     .container.dark + .count-body + .previous-records header,
@@ -539,7 +575,8 @@
 
   <body>
     <div class="container">
-      <div class="profile__"> 
+      <div class="banner"></div>
+      <div class="profile__">
         <div class="dp__">
           <img src="<%=staff.image%>" alt="<%=staff.name%>'s image" />
         </div>

@@ -257,9 +257,6 @@ pages.forEach((page) => {
       b();
     }
   });
-});
-
-
 
   page.addEventListener("touchend", () => {
     if (startX + 200 < moveX) {
@@ -272,5 +269,10 @@ pages.forEach((page) => {
       b();
     }
   });
+});
+
+
+
+ 
 //--------------------------------------------------------
  
