@@ -38,7 +38,7 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static(path.join(__dirname, "..", "public")));
-// app.use("/", express.static(path.join(__dirname, "..", "public", "uploads")));
+
 app.use(
   "/overview",
   express.static(path.join(__dirname, "..", "public", "uploads"))
@@ -90,7 +90,14 @@ app.get("/", isLogin, async (req, res) => {
     image: 1,
     department: 1,
   }).sort("name");
-  res.status(200).render("home.ejs", { staffs: data, user: isUserFound });
+  let hodsList = await Tour.find(
+    { position: "HOD" },
+    { image: 1, department: 1 }
+  );
+ 
+  res
+    .status(200)
+    .render("home.ejs", { staffs: data, hods: hodsList, user: isUserFound });
 });
 
 app.get("/signup", (req, res) => res.status(200).render("signup.ejs"));

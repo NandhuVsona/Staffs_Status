@@ -176,6 +176,9 @@ branches.forEach((branch, i) => {
   branch.addEventListener("click", () => {
     index = i;
     nextDeptForClickE(index);
+   
+     document.querySelector(" #all-dept-staffs").style.display= 'block';
+   
   });
 });
 function b() {
@@ -186,6 +189,8 @@ function b() {
 function nextDeptForClickE(dept) {
   branches.forEach((branch) => branch.classList.remove("active"));
   showdept(dept);
+ 
+   
   branches[index].classList.add("active");
 }
 function nextdept(dept) {
@@ -231,26 +236,30 @@ function showdept(index) {
   });
 }
 
-let startX, startY, moveX;
-pages.forEach((page) => {
-  page.addEventListener("touchstart", (e) => {
-    startX = e.touches[0].clientX;
-    startY = e.touches[0].clientY;
-  });
-  page.addEventListener("touchmove", (e) => {
-    moveX = e.touches[0].clientX;
-  });
+// let startX, startY, moveX;
+// pages.forEach((page) => {
+//   page.addEventListener("touchstart", (e) => {
+//     startX = e.touches[0].clientX;
+//     startY = e.touches[0].clientY;
+//   });
+//   page.addEventListener("touchmove", (e) => {
+//     moveX = e.touches[0].clientX;
+//   });
 
-  page.addEventListener("touchend", () => {
-    if (startX + 100 < moveX) {
-      index = index > 0 ? --index : 0;
-      pages[index].classList.remove("ani");
-      b();
-    } else if (startX - 100 > moveX) {
-      index = index < 14 ? ++index : 13;
-      pages[index].classList.add("ani");
-      b();
-    }
-  });
-});
+//   page.addEventListener("touchend", () => {
+//     if (startX + 100 < moveX) {
+//       index = index > 0 ? --index : 0;
+//       pages[index].classList.remove("ani");
+//       b();
+//     } else if (startX - 100 > moveX) {
+//       index = index < 14 ? ++index : 13;
+//       pages[index].classList.add("ani");
+//       b();
+//     }
+//   });
+// });
+
+
+
 //--------------------------------------------------------
+ 

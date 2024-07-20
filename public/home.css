@@ -294,13 +294,9 @@ input,
 }
 .show_list {
   display: grid;
- 
-
-  
 }
 a.show_list .profile {
   width: 100%;
- 
 }
 .hide_list {
   display: none;
@@ -322,6 +318,7 @@ a {
   padding: 0px;
   animation: openoptions 0.2s ease-in-out;
   transform-origin: top;
+  -webkit-animation: openoptions 0.2s ease-in-out;
 }
 .options.hide {
   display: none;
@@ -541,4 +538,47 @@ header {
 .bar i,
 .theme i {
   font-size: 20px;
+}
+
+/* styling for hods contaniner */
+
+.hods-container {
+  width: 100%;
+  height: 100px;
+  
+
+  gap: 20px;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  display: flex;
+  padding: 10px;
+  border-bottom: 1px solid #3333;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none;
+  justify-content: space-around;
+  align-items: center;
+}
+.hods-container::-webkit-scrollbar {
+  display: none;
+}
+.hod-profile {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  cursor: pointer;
+}
+
+.hods-container a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.hods-dp {
+  width: 60px;
+  height: 60px;
+  overflow: hidden;
+  border-radius: 50%;
+  background-color: rgba(219, 218, 219, 0.88);
 }

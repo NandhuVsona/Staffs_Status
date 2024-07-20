@@ -97,11 +97,18 @@
       overflow: hidden;
       padding-bottom: 10px;
     }
-    body .search-page.active + .logo + .container header+.homepage {
+    body .search-page.active + .logo + .container header + .homepage {
       display: none;
     }
-    body .search-page.active + .logo + .container header+.homepage.index {
+    body .search-page.active + .logo + .container header + .homepage.index {
       display: flex;
+    }
+    body .search-page.active + .logo + .container header + .homepage .hods-container {
+      display: none;
+    }
+    body .search-page.active + .logo + .container header + .homepage .hods-container+ .facultys__list a .profile{
+    
+      border-bottom: none;
     }
     body .search-page.active + .logo + .container header .search__bar {
       display: flex;
@@ -109,12 +116,8 @@
     }
     @keyframes searchBarDown {
       0% {
-  
-       width: 0;
-        
+        width: 0;
       }
-    
-     
     }
   </style>
 
@@ -189,7 +192,8 @@
           </ul>
         </div>
         <div class="search__bar">
-          <input autofocus
+          <input
+            autofocus
             type="text"
             placeholder="Search Staffs"
             class="search-input-box"
@@ -250,8 +254,23 @@
           </div>
         </div>
       </header>
+      
       <div class="homepage index">
         <div class="skeleton-loading"></div>
+        <div class="hods-container">
+          <%if(locals.hods){%> <% hods.forEach(hod =>{ %>
+          <a href="/overview/<%=hod._id%>">
+            <div class="hod-profile">
+              <div class="hods-dp">
+                <img loading="lazy" src="/overview/<%=hod.image%>" alt=" img" />
+              </div>
+              <div class="details">
+                <small class="hod__name"><%= hod.department%></small>
+              </div>
+            </div>
+          </a>
+          <% }) %> <% } %>
+        </div>
         <div class="facultys__list">
           <%if(locals.staffs.length>=1){%> <% staffs.forEach(staff =>{ %>
           <a href="/overview/<%=staff._id%>">
@@ -282,54 +301,61 @@
           <%}%>
         </div>
       </div>
+      <style>
+        #all-dept-staffs {
+          display: none;
+        }
+      </style>
 
-      <div class="homepage">
-        <div class="skeleton-loading"></div>
-        <div class="ECE_facultys__list"></div>
-      </div>
-      <div class="homepage">
-        <div class="skeleton-loading"></div>
-        <div class="CSE_facultys__list"></div>
-      </div>
-      <div class="homepage">
-        <div class="skeleton-loading"></div>
-        <div class="EEE_facultys__list"></div>
-      </div>
-      <div class="homepage">
-        <div class="skeleton-loading"></div>
-        <div class="MECH_facultys__list"></div>
-      </div>
-      <div class="homepage">
-        <div class="skeleton-loading"></div>
-        <div class="CIVIL_facultys__list"></div>
-      </div>
-      <div class="homepage">
-        <div class="skeleton-loading"></div>
-        <div class="IT_facultys__list"></div>
-      </div>
-      <div class="homepage">
-        <div class="skeleton-loading"></div>
-        <div class="AIDS_facultys__list"></div>
-      </div>
-      <div class="homepage">
-        <div class="skeleton-loading"></div>
-        <div class="AIML_facultys__list"></div>
-      </div>
-      <div class="homepage">
-        <div class="skeleton-loading"></div>
-        <div class="CSD_facultys__list"></div>
-      </div>
-      <div class="homepage">
-        <div class="skeleton-loading"></div>
-        <div class="MCT_facultys__list"></div>
-      </div>
-      <div class="homepage">
-        <div class="skeleton-loading"></div>
-        <div class="BME_facultys__list"></div>
-      </div>
-      <div class="homepage">
-        <div class="skeleton-loading"></div>
-        <div class="FT_facultys__list"></div>
+      <div id="all-dept-staffs">
+        <div class="homepage">
+          <div class="skeleton-loading"></div>
+          <div class="ECE_facultys__list"></div>
+        </div>
+        <div class="homepage">
+          <div class="skeleton-loading"></div>
+          <div class="CSE_facultys__list"></div>
+        </div>
+        <div class="homepage">
+          <div class="skeleton-loading"></div>
+          <div class="EEE_facultys__list"></div>
+        </div>
+        <div class="homepage">
+          <div class="skeleton-loading"></div>
+          <div class="MECH_facultys__list"></div>
+        </div>
+        <div class="homepage">
+          <div class="skeleton-loading"></div>
+          <div class="CIVIL_facultys__list"></div>
+        </div>
+        <div class="homepage">
+          <div class="skeleton-loading"></div>
+          <div class="IT_facultys__list"></div>
+        </div>
+        <div class="homepage">
+          <div class="skeleton-loading"></div>
+          <div class="AIDS_facultys__list"></div>
+        </div>
+        <div class="homepage">
+          <div class="skeleton-loading"></div>
+          <div class="AIML_facultys__list"></div>
+        </div>
+        <div class="homepage">
+          <div class="skeleton-loading"></div>
+          <div class="CSD_facultys__list"></div>
+        </div>
+        <div class="homepage">
+          <div class="skeleton-loading"></div>
+          <div class="MCT_facultys__list"></div>
+        </div>
+        <div class="homepage">
+          <div class="skeleton-loading"></div>
+          <div class="BME_facultys__list"></div>
+        </div>
+        <div class="homepage">
+          <div class="skeleton-loading"></div>
+          <div class="FT_facultys__list"></div>
+        </div>
       </div>
     </div>
     <script>
@@ -362,8 +388,6 @@
           console.log(err);
         }
       }
-
-     
     </script>
 
     <script type="module" src="home.js"></script>
