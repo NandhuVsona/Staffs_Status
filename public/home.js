@@ -176,9 +176,8 @@ branches.forEach((branch, i) => {
   branch.addEventListener("click", () => {
     index = i;
     nextDeptForClickE(index);
-   
-     document.querySelector(" #all-dept-staffs").style.display= 'block';
-   
+
+    document.querySelector(" #all-dept-staffs").style.display = "block";
   });
 });
 // function b() {
@@ -270,8 +269,4 @@ function showdept(index) {
 //   });
 // });
 
-
-
- 
 //--------------------------------------------------------
- 
