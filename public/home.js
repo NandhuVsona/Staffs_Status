@@ -181,52 +181,51 @@ branches.forEach((branch, i) => {
    
   });
 });
-function b() {
-  branches.forEach((branch) => {
-    nextdept(branch);
-  });
-}
+// function b() {
+//   branches.forEach((branch) => {
+//     nextdept(branch);
+//   });
+// }
 function nextDeptForClickE(dept) {
   branches.forEach((branch) => branch.classList.remove("active"));
   showdept(dept);
- 
-   
   branches[index].classList.add("active");
 }
-function nextdept(dept) {
-  branches.forEach((branch) => branch.classList.remove("active"));
-  showdept(index);
-  branches[index].classList.add("active");
-  if (index > 3) {
-    for (let i = 0; i < 3; i++) {
-      branches[i].style.display = "none";
-    }
-  } else {
-    for (let i = 0; i < 3; i++) {
-      branches[i].style.display = "flex";
-    }
-  }
-  if (index > 6) {
-    for (let i = 0; i < 6; i++) {
-      branches[i].style.display = "none";
-    }
-  }
-  if (index > 3 && index < 6) {
-    for (let i = 3; i < 6; i++) {
-      branches[i].style.display = "flex";
-    }
-  }
-  if (index > 9) {
-    for (let i = 0; i < 9; i++) {
-      branches[i].style.display = "none";
-    }
-  }
-  if (index > 6 && index < 9) {
-    for (let i = 6; i < 9; i++) {
-      branches[i].style.display = "flex";
-    }
-  }
-}
+
+// function nextdept(dept) {
+//   branches.forEach((branch) => branch.classList.remove("active"));
+//   showdept(index);
+//   branches[index].classList.add("active");
+//   if (index > 3) {
+//     for (let i = 0; i < 3; i++) {
+//       branches[i].style.display = "none";
+//     }
+//   } else {
+//     for (let i = 0; i < 3; i++) {
+//       branches[i].style.display = "flex";
+//     }
+//   }
+//   if (index > 6) {
+//     for (let i = 0; i < 6; i++) {
+//       branches[i].style.display = "none";
+//     }
+//   }
+//   if (index > 3 && index < 6) {
+//     for (let i = 3; i < 6; i++) {
+//       branches[i].style.display = "flex";
+//     }
+//   }
+//   if (index > 9) {
+//     for (let i = 0; i < 9; i++) {
+//       branches[i].style.display = "none";
+//     }
+//   }
+//   if (index > 6 && index < 9) {
+//     for (let i = 6; i < 9; i++) {
+//       branches[i].style.display = "flex";
+//     }
+//   }
+// }
 
 function showdept(index) {
   pages.forEach((page) => {
