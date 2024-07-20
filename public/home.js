@@ -261,5 +261,20 @@ function showdept(index) {
 
 
 
+<<<<<<< HEAD
+=======
+  page.addEventListener("touchend", () => {
+    if (startX + 200 < moveX) {
+      index = index > 0 ? --index : 0;
+      pages[index].classList.remove("ani");
+      b();
+    } else if (startX - 200 > moveX) {
+      index = index < 14 ? ++index : 13;
+      pages[index].classList.add("ani");
+      b();
+    }
+  });
+});
+>>>>>>> baa745f04e9a9218af18796e4f4ce72d68e200ef
 //--------------------------------------------------------
  
