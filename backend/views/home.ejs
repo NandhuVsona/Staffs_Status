@@ -408,6 +408,25 @@
           console.log(err);
         }
       }
+      function randomColor(){
+        let bits = [1,2,3,4,5,6,7,8,9,'a','b','c','d','e','f']
+        let color = '#'
+        for(let i =0 ; i<6; i++){
+          let bit = Math.floor(Math.random()*15)
+          color += bits[bit]
+        }
+       
+        
+        return color
+      }
+
+      let hods_dp = document.querySelectorAll(".hods-dp")
+      hods_dp.forEach(dp =>{
+        let bColor = randomColor();
+        console.log(bColor)
+        dp.style.border = `2px solid  ${bColor}`
+       
+      })
     </script>
 
     <script type="module" src="home.js"></script>

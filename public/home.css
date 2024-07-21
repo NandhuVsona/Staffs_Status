@@ -583,5 +583,13 @@ header {
   height: 60px;
   overflow: hidden;
   border-radius: 50%;
-  background-color: rgba(219, 218, 219, 0.88);
+  padding: 3px;
+ 
+}
+.hods-dp img{
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
 }
