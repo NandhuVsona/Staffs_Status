@@ -16,7 +16,7 @@ function hideMsg() {
     msgContainer.classList.add("hide");
   }, 3000);
 }
-let logoutLabel = document.getElementById("logout");
+
 let msgContainer = document.querySelector(".msg-container");
 let editName = document.getElementById("inputbox");
 let changePassword = document.getElementById("change-password");
@@ -238,27 +238,7 @@ async function deleteAccount() {
     });
 }
 
-//-----------Logout--------//
-logoutLabel.addEventListener("click", logout);
-async function logout() {
-  let req = await fetch("/logout", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-  })
-    .then((res) => res.json())
-    .then((res) => {
-      if (res.status === "success") {
-        window.location.href = "/";
-        window.location.reload();
-        window.location.href = "/";
-      }
-    })
-    .catch((err) => {
-      document.querySelector(".msg-box").innerHTML = res.message;
-      msgContainer.classList.remove("hide");
-      hideMsg();
-    });
-}
+
 //-----------Gender------//
 let swithcBtn = document.querySelector(".switch");
 swithcBtn.addEventListener("click", move);

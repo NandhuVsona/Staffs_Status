@@ -269,4 +269,26 @@ function showdept(index) {
 //   });
 // });
 
-//--------------------------------------------------------
+
+//-----------Logout--------//
+let logoutLabel = document.getElementById("logout");
+logoutLabel.addEventListener("click", logout);
+async function logout() {
+  let req = await fetch("/logout", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+  })
+    .then((res) => res.json())
+    .then((res) => {
+      if (res.status === "success") {
+        window.location.href = "/";
+        window.location.reload();
+        window.location.href = "/";
+      }
+    })
+    .catch((err) => {
+      document.querySelector(".msg-box").innerHTML = res.message;
+      msgContainer.classList.remove("hide");
+      hideMsg();
+    });
+}

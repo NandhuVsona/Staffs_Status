@@ -316,6 +316,7 @@ a {
   right: 20px;
   top: 50px;
   padding: 0px;
+ 
   animation: openoptions 0.2s ease-in-out;
   transform-origin: top;
   -webkit-animation: openoptions 0.2s ease-in-out;
