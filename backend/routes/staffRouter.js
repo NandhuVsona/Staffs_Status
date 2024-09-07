@@ -20,7 +20,7 @@ const router = express.Router();
 //GET ROUTES
 
 router.get("/signup", signupPage);
-router.get("/api/v1/staffs", getAllStaffs);
+router.get("/api/v1/staffs",getAllStaffs);
 router.get("/overview/:id", isLogin, overview);
 router.get("/api/v1/overview/:id", isLogin, getStaff);
 router.get("/logout", logout);
