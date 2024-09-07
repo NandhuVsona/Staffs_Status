@@ -170,7 +170,7 @@ app.post("/", async (req, res) => {
   }
 });
 
-app.get("/api/v1/staffs", isLogin, async (req, res) => {
+app.get("/api/v1/staffs", async (req, res) => {
   try {
     let query = { ...req.query };
     let exculdedFields = { name: 1, position: 1, image: 1 };
