@@ -136,6 +136,20 @@ const getAllStaffs = async (req, res) => {
     res.status(500).json(err.message);
   }
 };
+const getAllStaffsData = async (req, res) => {
+  try {
+    let query = { ...req.query };
+    let exculdedFields = { name: 1, position: 1, image: 1 };
+    const staffs = await Tour.find(query, exculdedFields).sort("name");
+    res.status(200).json({
+      status: "success",
+      result: staffs.length,
+      data: staffs,
+    });
+  } catch (err) {
+    res.status(500).json(err.message);
+  }
+};
 
 const overview = async (req, res) => {
   const id = req.params.id;
@@ -258,6 +272,7 @@ module.exports = {
   singin,
   home,
   getAllStaffs,
+  getAllStaffsData,
   overview,
   getStaff,
   logout,
