@@ -316,7 +316,7 @@ a {
   right: 20px;
   top: 50px;
   padding: 0px;
- 
+
   animation: openoptions 0.2s ease-in-out;
   transform-origin: top;
   -webkit-animation: openoptions 0.2s ease-in-out;
@@ -524,8 +524,8 @@ li:hover {
 
 @keyframes slide {
   0% {
-   opacity: 0;
-}
+    opacity: 0;
+  }
 }
 .container {
   position: relative;
@@ -548,7 +548,6 @@ header {
 .hods-container {
   width: 100%;
   height: 100px;
-  
 
   gap: 20px;
   overflow-x: scroll;
@@ -584,12 +583,128 @@ header {
   overflow: hidden;
   border-radius: 50%;
   padding: 3px;
- 
 }
-.hods-dp img{
+.hods-dp img {
   border-radius: 50%;
   -webkit-border-radius: 50%;
   -moz-border-radius: 50%;
   -ms-border-radius: 50%;
   -o-border-radius: 50%;
+}
+
+/* SideBar style */
+.sidebar {
+  width: 85%;
+  height: 100%;
+  background-color: rgb(255, 255, 255);
+  position: fixed;
+  top: 0;
+  z-index: 1;
+  left: 0;
+  display: none;
+}
+
+@keyframes slideRight {
+  from {
+    transform: translateX(-100px);
+    -webkit-transform: translateX(-100px);
+    -moz-transform: translateX(-100px);
+    -ms-transform: translateX(-100px);
+    -o-transform: translateX(-100px);
+  }
+}
+
+.sidebar strong {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  flex-direction: column;
+  gap: 10px;
+}
+.sidebar strong::before {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 65px;
+  background: linear-gradient(
+    to bottom left,
+    rgb(38, 0, 255),
+    rgb(0, 191, 255)
+  );
+  border-radius: 0px 0px 20px 20px;
+  -webkit-border-radius: 0px 0px 20px 20px;
+  -moz-border-radius: 0px 0px 20px 20px;
+  -ms-border-radius: 0px 0px 20px 20px;
+  -o-border-radius: 0px 0px 20px 20px;
+}
+.sidebar .close {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  z-index: 1;
+}
+.sidebar.active {
+  display: block;
+  transition: all 0.3s ease;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  animation: slideRight 0.3s ease;
+  -webkit-animation: slideRight 0.3s ease;
+
+
+}
+.sidebar strong img.user-profile {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  background-color: white;
+  padding: 5px;
+  z-index: 1;
+}
+.sidebar .settings ul {
+  display: flex;
+  list-style: none;
+  flex-direction: column;
+}
+.sidebar .settings ul li {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+  animation: slide-left 0.3s ease;
+  padding: 15px;
+  -webkit-animation: slide-left 0.3s ease 0.6s;
+  animation-fill-mode: forwards;
+  opacity: 1;
+}
+
+.sidebar .settings ul li .left-part p {
+  font-size: 18px;
+  font-weight: 600;
+}
+.sidebar .settings ul li .left-part img {
+  width: 20px;
+}
+.sidebar .settings ul li .left-part {
+  display: flex;
+  gap: 20px;
+}
+.sidebar .settings ul li .arrow-right {
+  opacity: 0.4;
+}
+
+@media screen and (min-width: 1024px) {
+  .sidebar .settings ul li:hover {
+    background-color: rgb(225, 225, 225);
+  }
 }
