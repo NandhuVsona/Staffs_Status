@@ -2,7 +2,7 @@
   "name": "Staffs Status",
   "short_name": "Staffs Status",
   "description": "Staffs Status is a tool designed to display real-time information about the current status and location of staff members.",
-  "start_url": "../backend/app.js",
+  "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#000000",
