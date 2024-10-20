@@ -23,6 +23,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="home.css" />
+    <link rel="manifest" href="manifest.json">
   </head>
   <style>
     .logo {
@@ -146,9 +147,11 @@
       </div>
     </div>
     <div class="container home hide">
+     
       <header>
         <div class="title">
-          <h3><i class="fa-solid fa-hands-holding-child"></i> Staffs Status</h3>
+          <!-- <i class="fa-solid fa-hands-holding-child"></i> -->
+          <h3> Staffs Status</h3>
           <div class="icons">
             <div class="search-icon">
               <i class="fa-solid fa-magnifying-glass"></i>
@@ -423,12 +426,13 @@
       let hods_dp = document.querySelectorAll(".hods-dp")
       hods_dp.forEach(dp =>{
         let bColor = randomColor();
-        console.log(bColor)
+       
         dp.style.border = `2px solid  ${bColor}`
        
       })
     </script>
 
+    <script type="module" src="service-worker.js"></script>
     <script type="module" src="home.js"></script>
   </body>
 </html>
