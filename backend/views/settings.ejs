@@ -499,6 +499,71 @@
         gap: 10px;
         width: 100%;
       }
+      .google-switch {
+        position: relative;
+        display: inline-block;
+        width: 48px;
+        height: 24px;
+      }
+
+      .google-switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+
+      .google-slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        transition: 0.4s;
+        border-radius: 34px;
+      }
+
+      .google-slider:before {
+        position: absolute;
+        content: "";
+        height: 20px;
+        width: 20px;
+        left: 2px;
+        bottom: 2px;
+        background-color: white;
+        transition: 0.4s;
+        border-radius: 50%;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+      }
+
+      input:checked + .google-slider {
+        background-color: #1a73e8;
+      }
+
+      input:checked + .google-slider:before {
+        transform: translateX(24px);
+      }
+
+      /* Optional hover effect */
+      .google-slider:hover {
+        box-shadow: 0 0 1px #1a73e8;
+      }
+
+      /* Hidden status text */
+      .status-text {
+        display: none;
+      }
+
+      /* Optional styling to show status text */
+      .google-switch input:checked + .google-slider + .status-text {
+        display: inline-block;
+        position: absolute;
+        top: 30px;
+        left: 0;
+        font-size: 12px;
+        color: #666;
+      }
     </style>
   </head>
   <body>
@@ -728,6 +793,21 @@
             <small class="phone-number-label"><%=staff.phoneNumber%></small>
           </section>
           <i class="fa-solid fa-angle-right"></i>
+        </a>
+        <a id="notification">
+          <i class="fa-solid fa-comment"></i>
+          <section>
+            <p>Notification</p>
+            <small>SMS reminders for your schedule.</small>
+
+          </section>
+          <small class="noti">
+            <label class="google-switch">
+              <input id="notificationToggle" type="checkbox" <%= staff.notification ? 'checked' : '' %>
+              />
+              <span class="google-slider"></span>
+            </label>
+          </small>
         </a>
         <a id="location">
           <i class="fa-solid fa-location-crosshairs"></i>
