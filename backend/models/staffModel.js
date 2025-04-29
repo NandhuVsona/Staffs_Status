@@ -105,6 +105,10 @@ let staffShceme = new mongooes.Schema({
     // minlength: [10, "Number must be 10 digits"],
     // maxlength: [10, "Number must be 10 digits"],
   },
+  notification: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const Tour = mongooes.model("Staffs", staffShceme);
