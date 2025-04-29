@@ -146,6 +146,13 @@ genderSaveBtn.addEventListener("click", () => {
   let field = document.querySelector(".gender-small-label");
   update(data, gender, genderSaveBtn, field);
 });
+document.getElementById('notificationToggle').addEventListener('change', function() {
+  const isChecked = this.checked;
+  console.log("Notification enabled:", isChecked);
+  let data = {notification : isChecked} // logs true or false
+  update(data,"",document.querySelector(".save-name-btn"),""); // Update the database with the new value
+});
+
 
 async function updateToDatabase(oldPass, newPass) {
   let data = { oldPass, newPass };
@@ -193,9 +200,13 @@ async function update(data, value, saveBtn, field = "") {
     body: JSON.stringify(data),
   })
     .then((res) => {
-      saveBtn.parentElement.parentElement.parentElement.classList.remove(
-        "show"
-      );
+      if (saveBtn == "") {
+      } else {
+        saveBtn.parentElement.parentElement.parentElement.classList.remove(
+          "show"
+        );
+      }
+
       if (field !== "") {
         field.innerHTML = value;
       }
@@ -237,7 +248,6 @@ async function deleteAccount() {
       return alert(err.message);
     });
 }
-
 
 //-----------Gender------//
 let swithcBtn = document.querySelector(".switch");
