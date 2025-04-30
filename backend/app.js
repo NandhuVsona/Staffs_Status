@@ -205,7 +205,7 @@ app.get("/api/v1/staffs/send-sms", async (req, res) => {
     const currentMinute = now.getMinutes();
 
     const classTimings = {
-      [process.env.FIRST_PERIOD_TIME]: "firstPeriod",
+      "06:55": "firstPeriod",
       [process.env.SECOND_PERIOD_TIME]: "secondPeriod",
       [process.env.THIRD_PERIOD_TIME]: "thirdPeriod",
       [process.env.FOURTH_PERIOD_TIME]: "fourthPeriod",
