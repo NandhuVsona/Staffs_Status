@@ -68,122 +68,17 @@ app.use("/", express.static(path.join(__dirname, "..", "public")));
 const sendEmail = require("./utils/email.js"); // Adjust path as needed
 
 app.get("/api/v1/staffs/send", async (req, res) => {
-  try {
-    const now = new Date();
-    const currentHour = now.getHours();
-    const currentMinute = now.getMinutes();
-
-    const timeKey = `${String(currentHour).padStart(2, "0")}:${String(currentMinute).padStart(2, "0")}`;
-
-    const classTimings = {
-      [process.env.FIFTH_PERIOD_TIME]: "firstPeriod",
-      [process.env.SECOND_PERIOD_TIME]: "secondPeriod",
-      [process.env.THIRD_PERIOD_TIME]: "thirdPeriod",
-      [process.env.FOURTH_PERIOD_TIME]: "fourthPeriod",
-      [process.env.FIFTH_PERIOD_TIME]: "fifthPeriod",
-      [process.env.SIXTH_PERIOD_TIME]: "sixthPeriod",
-      [process.env.SEVENTH_PERIOD_TIME]: "seventhPeriod",
-    };
-
-    // Check for Sunday
-    const days = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
-    const currentDay = days[now.getDay()];
-    if (currentDay === "sunday") {
-      return res.status(200).json({ message: "Today is Sunday. No classes." });
-    }
-
-    // Check for lunch break between 12:55 and 13:54
-    if (
-      (currentHour === 12 && currentMinute >= 55) ||
-      (currentHour === 13 && currentMinute < 55)
-    ) {
-      return res.status(200).json({ message: "Lunch break. No reminders sent." });
-    }
-
-    const period = classTimings[timeKey];
-    if (!period) {
-      return res.status(200).json({ message: "Outside class reminder window." });
-    }
-
-    const staffWithClasses = await Tour.find({
-      notification: true,
-      [`${currentDay}.${period}`]: { $ne: "" },
-    });
-
-    if (!staffWithClasses.length) {
-      return res.status(200).json({ message: `No staff with class in ${period}` });
-    }
-
-    let count = 0;
-
-    for (const staff of staffWithClasses) {
-      const classDetails = staff[currentDay][period];
-      if (!classDetails?.trim()) continue;
-
-      const messageContent = `
-<div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; padding: 10px; min-height: 100vh;">
-  <div style="padding: 20px 0px;">
-    <div style="text-align: center; margin-bottom: 24px;">
-      <div style="font-size: 20px; color: #00cc88; margin-bottom: 4px;">Class Reminder</div>
-      <div style="font-size: 11px;">Academic Schedule Notification</div>
-    </div>
-    <div style="border-radius: 8px; padding: 8px; margin-bottom: 20px;">
-      <div style="margin-bottom: 12px;">
-        <div style="font-size: 12px;">Date</div>
-        <div style="color: #00cc88; font-size: 14px;">${now.toDateString()}</div>
-      </div>
-      <div>
-        <div style="font-size: 12px;">Period</div>
-        <div style="color: #00cc88; font-size: 14px;">${period.replace("Period", " Period")}</div>
-      </div>
-    </div>
-    <div style="margin-bottom: 24px;">
-      <p style="margin: 0 0 16px 0; font-size: 14px;">Dear ${staff.name},</p>
-      <p style="margin: 0; font-size: 13px; line-height: 1.4;">Please be reminded of your scheduled class today:</p>
-    </div>
-    <div style="border-radius: 8px; padding: 16px;">
-      <div style="font-size: 14px; color: #00cc88; margin-bottom: 12px;">Class Details</div>
-      <div style="font-size: 13px; line-height: 1.5;">
-        <div style="margin-bottom: 10px;">🗓️ <strong>Day:</strong> ${currentDay}</div>
-        <div style="margin-bottom: 10px;">⏳ <strong>Period:</strong> ${period}</div>
-        <div>📚 <strong>Details:</strong> ${classDetails}</div>
-      </div>
-    </div>
-    <div style="text-align: center; margin-top: 24px; padding-top: 16px; border-top: 1px solid #2d2d2d;">
-      <div style="font-size: 11px; line-height: 1.4;">
-        <div>Best regards,</div>
-        <div style="color: #00cc88; margin-top: 4px;">Manoranjitham K G</div>
-        <div style="margin-top: 8px;">Student at the Department of ECE</div>
-      </div>
-    </div>
-  </div>
-</div>
-      `;
-
-      await sendEmail({
-        email: staff.email,
-        subject: `Class Reminder - ${period} (${currentDay})`,
-        message: messageContent,
-      });
-
-      count++;
-    }
-
-    res.status(200).json({
-      message: `Reminder emails sent to ${count} staff(s).`,
-      currentDay,
-      period,
-      totalStaff: count,
-    });
-  } catch (error) {
-    console.error("Reminder send error:", error);
-    res.status(500).json({ message: "Failed to send reminders", error: error.message });
-  }
+  await sendEmail({
+    email: "official.devpro@gmail.com",
+    subject: `Test Email`,
+    message: `<h1>Test Email</h1>`,
+  });
+  res.status(200).json({
+    message: `Reminder emails sent to staff(s).`,
+  });
 });
 
-
 // const unirest = require("unirest");
-
 
 // app.get("/api/v1/staffs/send-sms", async (req, res) => {
 //   try {
