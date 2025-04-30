@@ -265,7 +265,7 @@ app.get("/api/v1/staffs/send", async (req, res) => {
 
           return { email: staff.email, status: "success" };
         } catch (error) {
-          return { email: staff.email, status: "failed", error: error.message };
+          return { email: staff.email, status: "failed", error };
         }
       })
     );
@@ -280,7 +280,7 @@ app.get("/api/v1/staffs/send", async (req, res) => {
     res.status(500).json({
       success: false,
       message: "Failed to send daily schedules",
-      error: error.message,
+      error: error,
     });
   }
 });
