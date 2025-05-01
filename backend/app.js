@@ -149,7 +149,7 @@ app.get("/api/v1/staffs/send", async (req, res) => {
     const currentMinute = now.minute();
 
     const classTimings = {
-      "09:40": "firstPeriod",
+      "10:20": "firstPeriod",
       "09:55": "secondPeriod",
       "11:05": "thirdPeriod",
       "12:00": "fourthPeriod",
