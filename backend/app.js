@@ -15,6 +15,11 @@ const ejs = require("ejs");
 const { StatsFs } = require("fs");
 const { error } = require("console");
 require("dotenv").config();
+const dayjs = require("dayjs");
+const utc = require("dayjs/plugin/utc");
+const timezone = require("dayjs/plugin/timezone");
+dayjs.extend(utc);
+dayjs.extend(timezone);
 // const twilio = require("twilio");
 // const accountSid = process.env.TWILIO_ACCOUNT_SID;
 // const authToken = process.env.TWILIO_AUTH;
@@ -94,60 +99,17 @@ const createEmailTemplate = (staffName, schedule) => {
   return;
 };
 
-// app.get("/api/v1/staffs/send", async (req, res) => {
-//   try {
-//     // Get all staff with notifications enabled
-//     const staffMembers = await Staff.find({ notification: true });
 
-//     // Send emails
-//     const sendResults = await Promise.all(
-//       staffMembers.map(async (staff) => {
-//         try {
-//           const todaySchedule = getTodaysSchedule(staff);
-
-//           const subject = `📅 Your Daily Schedule - ${new Date().toLocaleDateString()}`;
-//           const message = createEmailTemplate(staff.name, todaySchedule);
-
-//           await sendEmail({
-//             email: staff.email,
-//             subject,
-//             message,
-//           });
-
-//           return { email: staff.email, status: "success" };
-//         } catch (error) {
-//           return { email: staff.email, status: "failed", error };
-//         }
-//       })
-//     );
-
-//     res.status(200).json({
-//       success: true,
-//       message: `Daily schedules sent to ${staffMembers.length} staff members`,
-//       results: sendResults,
-//     });
-//   } catch (error) {
-//     console.error("Error sending daily schedules:", error);
-//     res.status(500).json({
-//       success: false,
-//       message: "Failed to send daily schedules",
-//       error: error,
-//     });
-//   }
-// });
 
 app.get("/api/v1/staffs/send", async (req, res) => {
   try {
-    const now = new Date();
-    const currentHour = now.getHours();
-    const currentMinute = now.getMinutes();
-
-    const timeKey = `${String(currentHour).padStart(2, "0")}:${String(
-      currentMinute
-    ).padStart(2, "0")}`;
+    const now = dayjs().tz("Asia/Kolkata");
+    const timeKey = now.format("HH:mm");
+    const currentHour = now.hour();
+    const currentMinute = now.minute();
 
     const classTimings = {
-      "08:05": "firstPeriod",
+      "08:28": "firstPeriod",
       "09:55": "secondPeriod",
       "11:05": "thirdPeriod",
       "12:00": "fourthPeriod",
@@ -166,7 +128,7 @@ app.get("/api/v1/staffs/send", async (req, res) => {
       "friday",
       "saturday",
     ];
-    const currentDay = days[now.getDay()];
+    const currentDay = days[now.day()];
     if (currentDay === "sunday") {
       return res.status(200).json({ message: "Today is Sunday. No classes." });
     }
@@ -184,9 +146,8 @@ app.get("/api/v1/staffs/send", async (req, res) => {
     const period = classTimings[timeKey];
     console.log("Current timeKey:", timeKey);
     console.log("Matched period:", period);
-    
-    if (!period) {
 
+    if (!period) {
       return res
         .status(200)
         .json({ message: "Outside class reminder window.", period: period });
