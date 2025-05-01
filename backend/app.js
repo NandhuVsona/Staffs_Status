@@ -99,7 +99,47 @@ const createEmailTemplate = (staffName, schedule) => {
   return;
 };
 
+// app.get("/api/v1/staffs/send", async (req, res) => {
+//   try {
+//     // Get all staff with notifications enabled
+//     const staffMembers = await Staff.find({ notification: true });
 
+//     // Send emails
+//     const sendResults = await Promise.all(
+//       staffMembers.map(async (staff) => {
+//         try {
+//           const todaySchedule = getTodaysSchedule(staff);
+
+//           const subject = `📅 Your Daily Schedule - ${new Date().toLocaleDateString()}`;
+//           const message = createEmailTemplate(staff.name, todaySchedule);
+
+//           await sendEmail({
+//             email: staff.email,
+//             subject,
+//             message,
+//           });
+
+//           return { email: staff.email, status: "success" };
+//         } catch (error) {
+//           return { email: staff.email, status: "failed", error };
+//         }
+//       })
+//     );
+
+//     res.status(200).json({
+//       success: true,
+//       message: `Daily schedules sent to ${staffMembers.length} staff members`,
+//       results: sendResults,
+//     });
+//   } catch (error) {
+//     console.error("Error sending daily schedules:", error);
+//     res.status(500).json({
+//       success: false,
+//       message: "Failed to send daily schedules",
+//       error: error,
+//     });
+//   }
+// });
 
 app.get("/api/v1/staffs/send", async (req, res) => {
   try {
@@ -109,7 +149,7 @@ app.get("/api/v1/staffs/send", async (req, res) => {
     const currentMinute = now.minute();
 
     const classTimings = {
-      "08:55": "firstPeriod",
+      "09:40": "firstPeriod",
       "09:55": "secondPeriod",
       "11:05": "thirdPeriod",
       "12:00": "fourthPeriod",
@@ -118,7 +158,6 @@ app.get("/api/v1/staffs/send", async (req, res) => {
       "15:55": "seventhPeriod",
     };
 
-    // Check for Sunday
     const days = [
       "sunday",
       "monday",
@@ -129,11 +168,11 @@ app.get("/api/v1/staffs/send", async (req, res) => {
       "saturday",
     ];
     const currentDay = days[now.day()];
+
     if (currentDay === "sunday") {
       return res.status(200).json({ message: "Today is Sunday. No classes." });
     }
 
-    // Check for lunch break between 12:55 and 13:54
     if (
       (currentHour === 12 && currentMinute >= 55) ||
       (currentHour === 13 && currentMinute < 55)
@@ -144,13 +183,10 @@ app.get("/api/v1/staffs/send", async (req, res) => {
     }
 
     const period = classTimings[timeKey];
-    console.log("Current timeKey:", timeKey);
-    console.log("Matched period:", period);
-
     if (!period) {
       return res
         .status(200)
-        .json({ message: "Outside class reminder window.", period: period });
+        .json({ message: "Outside class reminder window.", period });
     }
 
     const staffWithClasses = await Tour.find({
@@ -164,13 +200,23 @@ app.get("/api/v1/staffs/send", async (req, res) => {
         .json({ message: `No staff with class in ${period}` });
     }
 
-    let count = 0;
+    // ✅ Send response early
+    res.status(200).json({
+      message: "Reminders will be sent shortly.",
+      currentDay,
+      period,
+      totalStaff: staffWithClasses.length,
+    });
 
-    for (const staff of staffWithClasses) {
-      const classDetails = staff[currentDay][period];
-      if (!classDetails?.trim()) continue;
+    // ✅ Start background email sending
+    setImmediate(async () => {
+      let count = 0;
 
-      const messageContent = `
+      for (const staff of staffWithClasses) {
+        const classDetails = staff[currentDay][period];
+        if (!classDetails?.trim()) continue;
+
+        const messageContent = ` 
       <!DOCTYPE html>
       <html>
       <head>
@@ -299,30 +345,30 @@ app.get("/api/v1/staffs/send", async (req, res) => {
         </div>
       </body>
       </html>
-      `;
+      ;`;
 
-      await sendEmail({
-        email: staff.email,
-        subject: `Class Reminder - ${period} (${currentDay})`,
-        message: messageContent,
-      });
+        try {
+          await sendEmail({
+            email: staff.email,
+            subject: `Class Reminder - ${period} (${currentDay})`,
+            message: messageContent,
+          });
+          count++;
+        } catch (err) {
+          console.error(`Failed to send to ${staff.email}`, err.message);
+        }
+      }
 
-      count++;
-    }
-
-    res.status(200).json({
-      message: `Reminder emails sent to ${count} staff(s).`,
-      currentDay,
-      period,
-      totalStaff: count,
+      console.log(`✅ Reminder emails sent to ${count} staff(s).`);
     });
   } catch (error) {
     console.error("Reminder send error:", error);
     res
       .status(500)
-      .json({ message: "Failed to send reminders", error: error.message });
+      .json({ message: "Internal server error", error: error.message });
   }
 });
+
 // const unirest = require("unirest");
 
 // app.get("/api/v1/staffs/send-sms", async (req, res) => {
