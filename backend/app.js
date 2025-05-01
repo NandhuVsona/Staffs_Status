@@ -147,13 +147,13 @@ app.get("/api/v1/staffs/send", async (req, res) => {
     ).padStart(2, "0")}`;
 
     const classTimings = {
-      [process.env.FIRST_PERIOD_TIME]: "firstPeriod",
-      [process.env.SECOND_PERIOD_TIME]: "secondPeriod",
-      [process.env.THIRD_PERIOD_TIME]: "thirdPeriod",
-      [process.env.FOURTH_PERIOD_TIME]: "fourthPeriod",
-      [process.env.FIFTH_PERIOD_TIME]: "fifthPeriod",
-      [process.env.SIXTH_PERIOD_TIME]: "sixthPeriod",
-      [process.env.SEVENTH_PERIOD_TIME]: "seventhPeriod",
+      "08:05": "firstPeriod",
+      "09:55": "secondPeriod",
+      "11:05": "thirdPeriod",
+      "12:00": "fourthPeriod",
+      "13:55": "fifthPeriod",
+      "14:00": "sixthPeriod",
+      "15:55": "seventhPeriod",
     };
 
     // Check for Sunday
@@ -182,10 +182,14 @@ app.get("/api/v1/staffs/send", async (req, res) => {
     }
 
     const period = classTimings[timeKey];
+    console.log("Current timeKey:", timeKey);
+    console.log("Matched period:", period);
+    
     if (!period) {
+
       return res
         .status(200)
-        .json({ message: "Outside class reminder window." });
+        .json({ message: "Outside class reminder window.", period: period });
     }
 
     const staffWithClasses = await Tour.find({
