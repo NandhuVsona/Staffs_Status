@@ -71,19 +71,19 @@ const Staff = require("./models/staffModel.js");
 const transporter = require("./utils/email.js");
 
 // Helper function to get current day schedule
-const getTodaysSchedule = (staff) => {
-  const days = [
-    "sunday",
-    "monday",
-    "tuesday",
-    "wednesday",
-    "thursday",
-    "friday",
-    "saturday",
-  ];
-  const today = days[new Date().getDay()];
-  return staff[today];
-};
+// const getTodaysSchedule = (staff) => {
+//   const days = [
+//     "sunday",
+//     "monday",
+//     "tuesday",
+//     "wednesday",
+//     "thursday",
+//     "friday",
+//     "saturday",
+//   ];
+//   const today = days[new Date().getDay()];
+//   return staff[today];
+// };
 
 // Beautiful email template with mobile-first design
 const createEmailTemplate = (staffName, schedule) => {
@@ -91,197 +91,271 @@ const createEmailTemplate = (staffName, schedule) => {
     (value) => value.trim() !== ""
   );
 
-  return `
-  
-<!DOCTYPE html>
-<html>
-<head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background-color: #f1f5f9;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-    .wrapper {
-      width: 100%;
-      padding: 20px 0px;
-    }
-    .container {
-      max-width: 500px;
-      margin: 0 auto;
-      background-color: #ffffff;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.07);
-      overflow: hidden;
-    }
-    .header {
-      background-color: #ffa100;
-      color: #ffffff;
-      padding: 30px 20px;
-      text-align: center;
-      font-size: 24px;
-      font-weight: bold;
-    }
-    .content {
-      padding: 6px;
-    }
-    .content p {
-      font-size: 16px;
-      color: #334155;
-      margin-bottom: 10px;
-    }
-    .schedule-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
-      font-size: 15px;
-      background-color: #f9fafb;
-      border-radius: 8px;
-      overflow: hidden;
-    }
-    .schedule-table th, .schedule-table td {
-      padding: 14px 12px;
-      text-align: left;
-    }
-    .schedule-table th {
-        background-color: #703bf6;
-      color: white;
-      font-weight: 600;
-    }
-    .schedule-table tr:nth-child(even) {
-      background-color: #edf2f7;
-    }
-    .no-classes {
-      text-align: center;
-      color: #6b7280;
-      padding: 30px 0;
-      font-size: 16px;
-    }
-    .footer {
-      text-align: center;
-      padding: 18px;
-      background-color: #f8fafc;
-      font-size: 13px;
-      color: #94a3b8;
-    }
-
-    @media only screen and (max-width: 600px) {
-     
-      .header {
-        font-size: 20px;
-        padding: 18px 16px;
-      }
-      .content p {
-        font-size: 15px;
-      }
-      .schedule-table th, .schedule-table td {
-        padding: 12px 10px;
-      }
-    }
-  </style>
-</head>
-<body>
-  <div class="wrapper">
-    <div class="container">
-      <div class="header">
-        📚 Today's Schedule
-      </div>
-
-      <div class="content">
-        <p>Hi ${staffName},</p>
-        <p>Here's your schedule for today:</p>
-
-        ${
-          hasClasses
-            ? `
-        <table class="schedule-table">
-          <thead>
-            <tr>
-              <th>Period</th>
-              <th>Details</th>
-            </tr>
-          </thead>
-          <tbody>
-            ${Object.entries(schedule)
-              .map(([period, details]) =>
-                details.trim()
-                  ? `
-              <tr>
-                <td>${period
-                  .replace(/([A-Z])/g, " $1")
-                  .replace(/^./, (str) => str.toUpperCase())}</td>
-                <td>${details}</td>
-              </tr>
-              `
-                  : ""
-              )
-              .join("")}
-          </tbody>
-        </table>
-        `
-            : `
-        <div class="no-classes">
-          No classes scheduled for today 🎉
-        </div>
-        `
-        }
-      </div>
-
-      <div class="footer">
-        Best regards,<br>
-        College Management Team<br>
-        📧 This is an automated message - please do not reply.
-      </div>
-    </div>
-  </div>
-</body>
-</html>
-
-`;
-
+  return;
 };
+
+// app.get("/api/v1/staffs/send", async (req, res) => {
+//   try {
+//     // Get all staff with notifications enabled
+//     const staffMembers = await Staff.find({ notification: true });
+
+//     // Send emails
+//     const sendResults = await Promise.all(
+//       staffMembers.map(async (staff) => {
+//         try {
+//           const todaySchedule = getTodaysSchedule(staff);
+
+//           const subject = `📅 Your Daily Schedule - ${new Date().toLocaleDateString()}`;
+//           const message = createEmailTemplate(staff.name, todaySchedule);
+
+//           await sendEmail({
+//             email: staff.email,
+//             subject,
+//             message,
+//           });
+
+//           return { email: staff.email, status: "success" };
+//         } catch (error) {
+//           return { email: staff.email, status: "failed", error };
+//         }
+//       })
+//     );
+
+//     res.status(200).json({
+//       success: true,
+//       message: `Daily schedules sent to ${staffMembers.length} staff members`,
+//       results: sendResults,
+//     });
+//   } catch (error) {
+//     console.error("Error sending daily schedules:", error);
+//     res.status(500).json({
+//       success: false,
+//       message: "Failed to send daily schedules",
+//       error: error,
+//     });
+//   }
+// });
 
 app.get("/api/v1/staffs/send", async (req, res) => {
   try {
-    // Get all staff with notifications enabled
-    const staffMembers = await Staff.find({ notification: true });
+    const now = new Date();
+    const currentHour = now.getHours();
+    const currentMinute = now.getMinutes();
 
-    // Send emails
-    const sendResults = await Promise.all(
-      staffMembers.map(async (staff) => {
-        try {
-          const todaySchedule = getTodaysSchedule(staff);
+    const timeKey = `${String(currentHour).padStart(2, "0")}:${String(
+      currentMinute
+    ).padStart(2, "0")}`;
 
-          const subject = `📅 Your Daily Schedule - ${new Date().toLocaleDateString()}`;
-          const message = createEmailTemplate(staff.name, todaySchedule);
+    const classTimings = {
+      [process.env.FIRST_PERIOD_TIME]: "firstPeriod",
+      [process.env.SECOND_PERIOD_TIME]: "secondPeriod",
+      [process.env.THIRD_PERIOD_TIME]: "thirdPeriod",
+      [process.env.FOURTH_PERIOD_TIME]: "fourthPeriod",
+      [process.env.FIFTH_PERIOD_TIME]: "fifthPeriod",
+      [process.env.SIXTH_PERIOD_TIME]: "sixthPeriod",
+      [process.env.SEVENTH_PERIOD_TIME]: "seventhPeriod",
+    };
 
-          await sendEmail({
-            email: staff.email,
-            subject,
-            message,
-          });
+    // Check for Sunday
+    const days = [
+      "sunday",
+      "monday",
+      "tuesday",
+      "wednesday",
+      "thursday",
+      "friday",
+      "saturday",
+    ];
+    const currentDay = days[now.getDay()];
+    if (currentDay === "sunday") {
+      return res.status(200).json({ message: "Today is Sunday. No classes." });
+    }
 
-          return { email: staff.email, status: "success" };
-        } catch (error) {
-          return { email: staff.email, status: "failed", error };
-        }
-      })
-    );
+    // Check for lunch break between 12:55 and 13:54
+    if (
+      (currentHour === 12 && currentMinute >= 55) ||
+      (currentHour === 13 && currentMinute < 55)
+    ) {
+      return res
+        .status(200)
+        .json({ message: "Lunch break. No reminders sent." });
+    }
+
+    const period = classTimings[timeKey];
+    if (!period) {
+      return res
+        .status(200)
+        .json({ message: "Outside class reminder window." });
+    }
+
+    const staffWithClasses = await Tour.find({
+      notification: true,
+      [`${currentDay}.${period}`]: { $ne: "" },
+    });
+
+    if (!staffWithClasses.length) {
+      return res
+        .status(200)
+        .json({ message: `No staff with class in ${period}` });
+    }
+
+    let count = 0;
+
+    for (const staff of staffWithClasses) {
+      const classDetails = staff[currentDay][period];
+      if (!classDetails?.trim()) continue;
+
+      const messageContent = `
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+          body {
+            margin: 0;
+            padding: 0;
+            background-color: #f1f5f9;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+          }
+          .wrapper {
+            width: 100%;
+            padding: 20px 0px;
+          }
+          .container {
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.07);
+            overflow: hidden;
+          }
+          .header {
+            background-color: #ffa100;
+            color: #ffffff;
+            padding: 30px 20px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+          }
+          .content {
+            padding: 7px;
+          }
+          .content p {
+            font-size: 16px;
+            color: #334155;
+            margin-bottom: 10px;
+          }
+          .schedule-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            font-size: 15px;
+            background-color: #f9fafb;
+            border-radius: 8px;
+            overflow: hidden;
+          }
+          .schedule-table th, .schedule-table td {
+            padding: 14px 12px;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+          }
+          .schedule-table th {
+            background-color: #703bf6;
+            color: white;
+            font-weight: 600;
+          }
+          .schedule-table tr:nth-child(even) {
+            background-color: #edf2f7;
+          }
+          .footer {
+            text-align: center;
+            padding: 18px;
+            background-color: #f8fafc;
+            font-size: 13px;
+            color: #94a3b8;
+          }
+          @media only screen and (max-width: 600px) {
+            .header {
+              font-size: 20px;
+              padding: 18px 16px;
+            }
+            .content p {
+              font-size: 15px;
+            }
+            .schedule-table th, .schedule-table td {
+              padding: 12px 10px;
+            }
+          }
+        </style>
+      </head>
+      <body>
+        <div class="wrapper">
+          <div class="container">
+            <div class="header">
+              📚 Today's Schedule
+            </div>
+      
+            <div class="content">
+              <p>Hi ${staff.name},</p>
+               <p>Here's your schedule for today:</p>
+      
+              <table class="schedule-table">
+                <thead>
+                  <tr>
+                    <th colspan="2">Details</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Day</td>
+                    <td>${currentDay}</td>
+                  </tr>
+                  <tr>
+                    <td>Period</td>
+                    <td>${period}</td>
+                  </tr>
+                  <tr>
+                    <td>Class</td>
+                    <td>${classDetails}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+      
+            <div class="footer">
+              Best regards,<br>
+             <div style="color: #00cc88; margin-top: 4px;">Manoranjitham K G</div>
+             
+             <div style="color:rgb(190, 0, 204); margin-top: 4px;">Gophikrishnan A</div>
+              <br>
+              <div style="margin-top: 5px;">Student at the Department of ECE</div>
+            </div>
+          </div>
+        </div>
+      </body>
+      </html>
+      `;
+
+      await sendEmail({
+        email: staff.email,
+        subject: `Class Reminder - ${period} (${currentDay})`,
+        message: messageContent,
+      });
+
+      count++;
+    }
 
     res.status(200).json({
-      success: true,
-      message: `Daily schedules sent to ${staffMembers.length} staff members`,
-      results: sendResults,
+      message: `Reminder emails sent to ${count} staff(s).`,
+      currentDay,
+      period,
+      totalStaff: count,
     });
   } catch (error) {
-    console.error("Error sending daily schedules:", error);
-    res.status(500).json({
-      success: false,
-      message: "Failed to send daily schedules",
-      error: error,
-    });
+    console.error("Reminder send error:", error);
+    res
+      .status(500)
+      .json({ message: "Failed to send reminders", error: error.message });
   }
 });
 // const unirest = require("unirest");
