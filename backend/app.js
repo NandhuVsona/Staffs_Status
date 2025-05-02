@@ -30,6 +30,12 @@ dayjs.extend(timezone);
 
 //const uploads = multer({dest:'/Staffs Status/backend/uploads/'})
 
+app.get("/wakeup", (req, res) => {
+  res.status(200).json({
+    message: "Server is awake!",
+  });
+});
+
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "../public/uploads/");
