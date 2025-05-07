@@ -29,7 +29,6 @@ dayjs.extend(timezone);
 //const staffRoutes = require("./routes/staffRouter");
 
 //const uploads = multer({dest:'/Staffs Status/backend/uploads/'})
-
 app.get("/wakeup", (req, res) => {
   res.status(200).json({
     message: "Server is awake!",
@@ -147,6 +146,235 @@ const createEmailTemplate = (staffName, schedule) => {
 //   }
 // });
 
+// app.get("/api/v1/staffs/send", async (req, res) => {
+//   try {
+//     const now = dayjs().tz("Asia/Kolkata");
+//     const timeKey = now.format("HH:mm");
+//     const currentHour = now.hour();
+//     const currentMinute = now.minute();
+
+//     const classTimings = {
+//       "09:40": "firstPeriod",
+//       "09:55": "secondPeriod",
+//       "11:05": "thirdPeriod",
+//       "12:00": "fourthPeriod",
+//       "13:55": "fifthPeriod",
+//       "14:00": "sixthPeriod",
+//       "15:55": "seventhPeriod",
+//     };
+
+//     const days = [
+//       "sunday",
+//       "monday",
+//       "tuesday",
+//       "wednesday",
+//       "thursday",
+//       "friday",
+//       "saturday",
+//     ];
+//     const currentDay = days[now.day()];
+
+//     if (currentDay === "sunday") {
+//       return res.status(200).json({ message: "Today is Sunday. No classes." });
+//     }
+
+//     if (
+//       (currentHour === 12 && currentMinute >= 55) ||
+//       (currentHour === 13 && currentMinute < 55)
+//     ) {
+//       return res
+//         .status(200)
+//         .json({ message: "Lunch break. No reminders sent." });
+//     }
+
+//     const period = classTimings[timeKey];
+//     if (!period) {
+//       return res
+//         .status(200)
+//         .json({ message: "Outside class reminder window.", period });
+//     }
+
+//     const staffWithClasses = await Tour.find({
+//       notification: true,
+//       [`${currentDay}.${period}`]: { $ne: "" },
+//     });
+
+//     if (!staffWithClasses.length) {
+//       return res
+//         .status(200)
+//         .json({ message: `No staff with class in ${period}` });
+//     }
+
+//     // ✅ Send response early
+//     res.status(200).json({
+//       message: "Reminders will be sent shortly.",
+//       currentDay,
+//       period,
+//       totalStaff: staffWithClasses.length,
+//     });
+
+//     // ✅ Start background email sending
+//     setImmediate(async () => {
+//       let count = 0;
+
+//       for (const staff of staffWithClasses) {
+//         const classDetails = staff[currentDay][period];
+//         if (!classDetails?.trim()) continue;
+
+//         const messageContent = ` 
+//       <!DOCTYPE html>
+//       <html>
+//       <head>
+//         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+//         <style>
+//           body {
+//             margin: 0;
+//             padding: 0;
+//             background-color: #f1f5f9;
+//             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+//           }
+//           .wrapper {
+//             width: 100%;
+//             padding: 20px 0px;
+//           }
+//           .container {
+//             max-width: 500px;
+//             margin: 0 auto;
+//             background-color: #ffffff;
+//             border-radius: 12px;
+//             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.07);
+//             overflow: hidden;
+//           }
+//           .header {
+//             background-color: #ffa100;
+//             color: #ffffff;
+//             padding: 30px 20px;
+//             text-align: center;
+//             font-size: 24px;
+//             font-weight: bold;
+//           }
+//           .content {
+//             padding: 7px;
+//           }
+//           .content p {
+//             font-size: 16px;
+//             color: #334155;
+//             margin-bottom: 10px;
+//           }
+//           .schedule-table {
+//             width: 100%;
+//             border-collapse: collapse;
+//             margin-top: 20px;
+//             font-size: 15px;
+//             background-color: #f9fafb;
+//             border-radius: 8px;
+//             overflow: hidden;
+//           }
+//           .schedule-table th, .schedule-table td {
+//             padding: 14px 12px;
+//             text-align: center;
+//             border: 1px solid #e2e8f0;
+//           }
+//           .schedule-table th {
+//             background-color: #703bf6;
+//             color: white;
+//             font-weight: 600;
+//           }
+//           .schedule-table tr:nth-child(even) {
+//             background-color: #edf2f7;
+//           }
+//           .footer {
+//             text-align: center;
+//             padding: 18px;
+//             background-color: #f8fafc;
+//             font-size: 13px;
+//             color: #94a3b8;
+//           }
+//           @media only screen and (max-width: 600px) {
+//             .header {
+//               font-size: 20px;
+//               padding: 18px 16px;
+//             }
+//             .content p {
+//               font-size: 15px;
+//             }
+//             .schedule-table th, .schedule-table td {
+//               padding: 12px 10px;
+//             }
+//           }
+//         </style>
+//       </head>
+//       <body>
+//         <div class="wrapper">
+//           <div class="container">
+//             <div class="header">
+//               📚 Today's Schedule
+//             </div>
+      
+//             <div class="content">
+//               <p>Hi ${staff.name},</p>
+//                <p>Here's your schedule for today:</p>
+      
+//               <table class="schedule-table">
+//                 <thead>
+//                   <tr>
+//                     <th colspan="2">Details</th>
+//                   </tr>
+//                 </thead>
+//                 <tbody>
+//                   <tr>
+//                     <td>Day</td>
+//                     <td>${currentDay}</td>
+//                   </tr>
+//                   <tr>
+//                     <td>Period</td>
+//                     <td>${period}</td>
+//                   </tr>
+//                   <tr>
+//                     <td>Class</td>
+//                     <td>${classDetails}</td>
+//                   </tr>
+//                 </tbody>
+//               </table>
+//             </div>
+      
+//             <div class="footer">
+//               Best regards,<br>
+//              <div style="color: #00cc88; margin-top: 4px;">Manoranjitham K G</div>
+             
+//              <div style="color:rgb(190, 0, 204); margin-top: 4px;">Gophikrishnan A</div>
+//               <br>
+//               <div style="margin-top: 5px;">Student at the Department of ECE</div>
+//             </div>
+//           </div>
+//         </div>
+//       </body>
+//       </html>
+//       ;`;
+
+//         try {
+//           await sendEmail({
+//             email: staff.email,
+//             subject: `Class Reminder - ${period} (${currentDay})`,
+//             message: messageContent,
+//           });
+//           count++;
+//         } catch (err) {
+//           console.error(`Failed to send to ${staff.email}`, err.message);
+//         }
+//       }
+
+//       console.log(`✅ Reminder emails sent to ${count} staff(s).`);
+//     });
+//   } catch (error) {
+//     console.error("Reminder send error:", error);
+//     res
+//       .status(500)
+//       .json({ message: "Internal server error", error: error.message });
+//   }
+// });
+
+
 app.get("/api/v1/staffs/send", async (req, res) => {
   try {
     const now = dayjs().tz("Asia/Kolkata");
@@ -154,30 +382,78 @@ app.get("/api/v1/staffs/send", async (req, res) => {
     const currentHour = now.hour();
     const currentMinute = now.minute();
 
-    const classTimings = {
-      "08:55": "firstPeriod",
-      "09:55": "secondPeriod",
-      "11:05": "thirdPeriod",
-      "12:00": "fourthPeriod",
-      "13:55": "fifthPeriod",
-      "14:55": "sixthPeriod",
-      "15:55": "seventhPeriod",
-    };
+    const attendanceReminderTimes = ["12:30", "16:30"];
 
     const days = [
-      "sunday",
-      "monday",
-      "tuesday",
-      "wednesday",
-      "thursday",
-      "friday",
-      "saturday",
+      "sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"
     ];
     const currentDay = days[now.day()];
+    const todayDate = now.format("YYYY-MM-DD");
 
     if (currentDay === "sunday") {
       return res.status(200).json({ message: "Today is Sunday. No classes." });
     }
+
+    // ✅ Handle Attendance Reminder at 12:30 and 16:30
+    if (attendanceReminderTimes.includes(timeKey)) {
+      const staffToNotify = await Tour.find({ notification: true });
+
+      if (!staffToNotify.length) {
+        return res.status(200).json({ message: "No staff have notifications enabled." });
+      }
+
+      res.status(200).json({
+        message: "Attendance verification reminders are being sent.",
+        timeKey,
+        totalStaff: staffToNotify.length,
+      });
+
+      setImmediate(async () => {
+        let count = 0;
+
+        for (const staff of staffToNotify) {
+          const messageContent = `
+          <html>
+            <body style="font-family: Arial, sans-serif; background: #f1f5f9; padding: 20px;">
+              <div style="max-width: 500px; margin: auto; background: #fff; padding: 20px; border-radius: 8px;">
+                <h2 style="color: #703bf6;">🔔 Attendance Verification</h2>
+                <p>Dear ${staff.name},</p>
+                <p>Could you please verify if attendance has been marked for <strong>${todayDate}</strong>?</p>
+                <p>Thank you for your attention.</p>
+                <br>
+                <p style="font-size: 13px; color: #94a3b8;">Sent by Manoranjitham K G & Gophikrishnan A</p>
+              </div>
+            </body>
+          </html>`;
+
+          try {
+            await sendEmail({
+              email: staff.email,
+              subject: `🔔 Attendance Reminder – ${todayDate}`,
+              message: messageContent,
+            });
+            count++;
+          } catch (err) {
+            console.error(`Failed to send to ${staff.email}`, err.message);
+          }
+        }
+
+        console.log(`✅ Attendance verification emails sent to ${count} staff(s).`);
+      });
+
+      return; // Exit after sending attendance reminders
+    }
+
+    // ✅ Class Reminder Logic
+    const classTimings = {
+      "09:40": "firstPeriod",
+      "09:55": "secondPeriod",
+      "11:05": "thirdPeriod",
+      "12:00": "fourthPeriod",
+      "13:55": "fifthPeriod",
+      "14:00": "sixthPeriod",
+      "15:55": "seventhPeriod",
+    };
 
     if (
       (currentHour === 12 && currentMinute >= 55) ||
@@ -206,7 +482,6 @@ app.get("/api/v1/staffs/send", async (req, res) => {
         .json({ message: `No staff with class in ${period}` });
     }
 
-    // ✅ Send response early
     res.status(200).json({
       message: "Reminders will be sent shortly.",
       currentDay,
@@ -214,7 +489,6 @@ app.get("/api/v1/staffs/send", async (req, res) => {
       totalStaff: staffWithClasses.length,
     });
 
-    // ✅ Start background email sending
     setImmediate(async () => {
       let count = 0;
 
@@ -374,6 +648,7 @@ app.get("/api/v1/staffs/send", async (req, res) => {
       .json({ message: "Internal server error", error: error.message });
   }
 });
+
 
 // const unirest = require("unirest");
 
@@ -565,6 +840,7 @@ app.get("/optimize/:id", isLogin, async (req, res) => {
     res.status(500).json(err.message);
   }
 });
+
 
 app.post("/home", uploads, async (req, res) => {
   try {
