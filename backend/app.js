@@ -446,7 +446,7 @@ app.get("/api/v1/staffs/send", async (req, res) => {
 
     // ✅ Class Reminder Logic
     const classTimings = {
-      "09:40": "firstPeriod",
+      "08:55": "firstPeriod",
       "09:55": "secondPeriod",
       "11:05": "thirdPeriod",
       "12:00": "fourthPeriod",
