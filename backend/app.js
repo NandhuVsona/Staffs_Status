@@ -451,7 +451,7 @@ app.get("/api/v1/staffs/send", async (req, res) => {
       "11:05": "thirdPeriod",
       "12:00": "fourthPeriod",
       "13:55": "fifthPeriod",
-      "14:00": "sixthPeriod",
+      "14:55": "sixthPeriod",
       "15:55": "seventhPeriod",
     };
 
@@ -856,7 +856,7 @@ app.post("/home", uploads, async (req, res) => {
       position: req.body.position,
       location: req.body.location,
       gender: req.body.gender,
-      image: req.file.filename,
+      image: "1747232691694profile.jpg",
     });
 
     await staff.save();
